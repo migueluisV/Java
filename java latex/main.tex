@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %paquete para usar imágenes y figuras
+\usepackage{geometry} %paquete para trabajar con los márgenes del documento
+\usepackage{fancyhdr} %paquete para personalizar encabezado y pie de página
+\usepackage{lastpage} %paquete para referenciar páginas del documento
+\usepackage{listings} %paquete para escribir código de programación
+\usepackage{inconsolata} %paquete de tipo de letra consola
+\usepackage{multirow} %paquete para combinar filas y columnas en tablas
+\usepackage{array} %paquete para trabajar tablas especializadas
+\usepackage{color} %paquete básico para agregar color al texto
+
+\lstset{
+language = Java, %lenguaje con palabras reservadas de este resaltadas
+basicstyle = \ttfamily, %utiliza la fuente tttfamily, en especial el paquete inconsolata
+frame = none, %quita el marco al cuadro flotante que contiene el código o texto
+columns = fullflexible, %ajusta el cuadro flotante al tamaño del texto del documento
+breaklines = true,
+inputencoding = utf8, %admite caracteres del código utf8
+extendedchars = true, %soporte para caracteres especiales
+showstringspaces = false, %quita los guiones bajos predeterminados de los espacios en cadenas de texto
+escapebegin = \obeyspaces, %complemento de la entrada anterior
+%numberstyle = \color{red}, %color de los números en el texto o código
+%stringstyle = \color{red}, %color de las cadenas de texto en el texto o código
+%keywordstyle = \color{red}, %color de las palabras reservadas en el texto o código
+%identifierstyle = \color{red}, %color del texto o código
+%commentstyle = \color{red}, %color de los comentarios en el texto o código
+literate = %acepta los siguientes caracteres especiales fuera de utf8
+    {á}{{\'a}}1
+    {é}{{\'e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1
+    {ú}{{\'u}}1
+    {ñ}{{\-n}}1
+    {Á}{{\'A}}1
+    {É}{{\'E}}1
+    {Í}{{\'I}}1
+    {Ó}{{\'O}}1
+    {Ú}{{\'U}}1
+    {Ñ}{{\-N}}1,
+}
+
+\newgeometry{ %márgenes del documento
+    top=0.75in, %superior
+    bottom=0.75in, %inferior
+    outer=0.75in, %parte exterior
+    inner=1.5in, %parte interior
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Overleaf}
+\lhead{Apuntes de Java}
+\rfoot{Pagina \thepage \hspace{1pt} de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\title{Apuntes de Java\\
+\Large{Notas}}
+\author{LEMV}
+\date{Realizadas: Abril 2022}
+
+\begin{document}
+
+\renewcommand*\contentsname{Índice}
+
+\maketitle\newpage
+\tableofcontents\newpage
+
+\include{1.conceptos_basicos}
+\include{2.condicionales_ciclos}
+\include{3.arreglos}
+\include{4.poo_clases_objetos}
+\include{5.excepciones_archivos_hilos_listas}
+
+\end{document}
