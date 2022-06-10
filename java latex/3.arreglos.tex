@@ -1,0 +1,45 @@
+\section{Arreglos}
+Para declarar un \textbf{arreglo sencillo}, es necesario seguir la siguiente estructura:\begin{center}\textit{$<$Tipo dato$>$[] $<$Nombre arreglo$>$;\\$<$Tipo dato$>$ [] $<$Nombre arreglo$>$ = new $<$Tipo dato$>$[Num elementos];\\int[] nums = new int[10];}\end{center}
+Un arreglo tiene \textbf{índices}, los cuales hacen referencia a los elementos del arreglo; si un arreglo tiene 10 elementos, su índice va de 0 a 9 (1 - 10), por lo que, si queremos ver o utilizar el contenido del elemento 6 del arreglo, debemos utilizar la siguiente instrucción:\begin{center}\textit{nums[5] = 1;}\end{center}
+Para \textbf{inicializar un arreglo} con tipo de datos nativos utilizamos la siguiente estructura:\begin{center}\textit{$<$Tipo dato$>$ [] $<$Nombre arreglo$>$ = \{$<$Dato1$>$, $<$Dato2$>$, ... $<$DatoN$>$\};\\String[] nombs = \{"Luis", "Mario", "Enrique"\};}\end{center}
+\textit{La propiedad \textit{length}}: esta propiedad de arreglos te permite conocer la cantidad de elementos de un arreglo, basta con escribir el nombre del arreglo, seguido de .length y nos regresará como resultado el número de elementos (entero):\begin{center}\textit{int[]nums = new int[5];\\System.out.println(nums.length); //Imprime 5}\end{center}
+Un ejemplo de el uso de arreglos para determinar la cantidad de elementos de un arreglo, que el usuario ingrese los datos, y se calcule la suma de estos:
+\begin{lstlisting}
+    import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int i, res = 0; //Declaración y asignación de valores a las variables
+        int length = scanner.nextInt(); //Asignación de un valor al largo del arreglo
+        int[] array =  new int[length]; //Declaración del arreglo
+        for (i = 0; i < array.length; i++) {
+            array[i] = scanner.nextInt(); //Asignación de un valor a los elementos del arreglo por medio de un ciclo for
+        }
+
+        for (i = 0; i < array.length; i++){
+            res += array[i]; //Suma acumulativa de los elementos del arreglo por medio de un ciclo for
+        }
+        System.out.println(res); //Imprime la suma
+        }
+    }
+\end{lstlisting}
+
+\subsection{Ciclo mejorado para arreglos}
+Así como el \textbf{foreach} en CSharp, en Java existe un ciclo que se encarga de recorrer los elementos de un arreglo sin que exista la posibilidad de errores y se vé más limpio, es llamado \textbf{ciclo mejorado} o \textbf{ciclo for each}, su estructura es la siguiente:
+\begin{lstlisting}
+    int[]nums = {1, 2, 3, 4, 5}; //Declaración y asignación de valores al arreglo
+        
+    for(int i: nums){ //for (variable para navegar en el arreglo : nombre del arreglo)
+        System.out.println(i); //Instrucciones
+    }
+\end{lstlisting}
+\textit{Nota}: el tipo de dato de la variable de navegación debe de coincidir con el tipo de dato de los elementos del arreglo.
+
+\subsection{Arreglos multidimensionales}
+Los arreglos pueden tener más de una \textbf{dimensión}, si es de una dimensión, podemos verlo como una sola fila de elementos; si es de dos dimensiones, podemos verlo como una tabla con columnas y filas; si es de tres dimensiones, podemos verlo como un cubo, con filas, columnas y profundidad.\\
+Entonces, para declarar un arreglo multidimensional debemos seguir la siguiente estructura:\begin{center}\textit{$<$Tipo dato$>$[][] $<$Nombre arreglo$>$;\\$<$Tipo dato$>$[][] $<$Nombre arreglo$>$ = new $<$Tipo dato$>$ [Num elementos][Num elementos];\\int[][] nums = new int[3][3];}\end{center}
+Vemos que el ejemplo anterior hay dos pares de corchetes cuadrados, lo cual significa que el arreglo es de dimensión dos, si hubiera tres pares, sería de dimensión tres. Para poder \textbf{inicializarlo} seguimos el siguiente ejemplo:\begin{center}\textit{int[][] nums = \{\{1, 3, 5\}, \{2, 4, 6\}, \{7, 8, 9\}\}}\end{center}
+Para un arreglo de dimensión dos, el primer par de corchetes representa el número de columnas que tendrá, y el segundo par de corchetes son la cantidad de filas, por ende, en la inicialización previa, vemos que el arreglo bidimensional es de 3x3, porque hay tres pares de llaves (filas) con tres elementos en cada uno (columnas).
+Para acceder a los elementos del arreglo también se utilizan índices base 0, y seguimos la lógica de los pares de corchetes cuadrados explicado anteriormente:\begin{center}\textit{System.out.println(nums[0, 0];)}\end{center}

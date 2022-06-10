@@ -1,0 +1,118 @@
+\section{Conceptos básicos}
+\begin{itemize}
+    \item Todos los programas de Java están contenidos dentro de una \textbf{clase} con algún nombre en particular, como \textbf{App}, \textbf{Program} o un nombre personalizado.
+    \item Todos los programas de Java tienen un punto de partida, un procedimiento llamado \textbf{main} (como en C\#).
+    \item El lenguaje incluye temas como:
+    \begin{itemize}
+        \item Indicadores de acceso.
+        \item Tipo de retorno de métodos (procedimientos y funciones).
+        \item Formas de creación de métodos (estática o no).
+        \item Parámetros en funciones y procedimientos.
+    \end{itemize}
+    \item Cada instrucción debe terminar con un punto y coma (\textbf{;}).
+    \item Cada clase, función u objeto debe abrirse con llaves (\textbf{\{ \}}.
+\end{itemize}
+Esta es la estructura inicial o básica de un programa en Java:
+\begin{lstlisting}
+    public class App {
+        public static void main(String[] args) throws Exception {
+            System.out.println("hola mundo");
+        }
+}
+\end{lstlisting}
+
+
+
+\section{Comentarios}
+Java soporta el poder hacer comentarios de una y varias líneas:\\
+Se usan dos diagonales (\textbf{//}) para comentar una línea de código.\begin{center}\textit{//Esto es un comentario\\x = 5; //Variable comentada}\end{center}
+Se usa una diagonal y un asterisco (\textbf{/*}) al inicio del bloque y un asterisco y diagonal (\textbf{*/}) al final para comentar varias líneas o un bloque de código.
+\begin{center}\textit{/*System.out.println("Hola mundo");\\x = 5;\\Dos líneas comentadas*/}\end{center}
+Una herramienta del \textit{Java Development Kit} es que se puede generar documentación automática de un proyecto Java en formato HTML, esta documentación toma el código fuente y lo muestra más presentable para que otro desarrollador entienda el programa. Utilizando los \textbf{comentarios de documentación} podemos hacer que esta documentación generada esté aún más presentable, por así decirlo, si insertamos comentarios de documentación en cada clase, función, procedimiento, declaración de variable, cuando generemos la documentación, veremos qué ocurre en cada parte donde pusimos un comentario de este tipo. Para insertar un comentario de documentación, utilizamos una diagonal y dos asteriscos (\textbf{/**}) al inicio de la instrucción y una diagonal y un asterisco al final (\textbf{*/}). \begin{center}\textit{/** Inicia una clase */\\class Prueba \{\}}\end{center}
+Por último, si escribimos una diagonal y más de un asterisco (\textbf{/*******...}), Java lo interpreta como que se quiere hacer un recuadro o una separación entre partes o bloques de código, como se puede ver a continuación:\begin{center}\textit{/**************************\\Comienzo de un método\\/**************************}\end{center}
+
+
+
+\section{Clases importadas}
+Podemos importar clases especiales u externas para volver más rico el programa de java, esto es como las librerías o cabeceras en otros lenguajes.\\
+La palabra reservada a utilizar es \textbf{import}, seguido de la clase a importar, por ejemplo: java.util.Scanner.
+
+
+
+\section{Variables}
+Los tipos de datos existentes en Java son:
+\begin{itemize}
+    \item \textbf{int}: datos numéricos enteros.
+    \item \textbf{double}: datos numéricos con punto decimal.
+    \item \textbf{String}: una cadena de texto.
+    \item \textbf{char}: un único carácter.
+    \item \textbf{boolean}: boleano, almacena si o no.
+\end{itemize}
+Recordemos que hay variaciones con estas variables, podemos crear una variable entera que tenga menos espacio de bits para almacenar un número (byte y short), lo mismo ocurre con los flotantes (float) o hacer que acepten muchos bits (long).\\
+Se puede poner una coma entre cada variable declarada del mismo tipo para hacer una declaración de variables en una sola línea:\begin{center}\textit{double n1, n2, n3, n4, n5, prom;}\end{center}
+
+\subsection{Concatenar cadenas}
+Se utiliza el \textbf{operador +} para concatenar (unir) más de una cadena.\begin{center}\textit{System.out.println("hola" + "mundo" + "en" + "Java");}\end{center}
+
+\subsection{Reglas para nombrar variables}
+Para administrar mejor el nombre de las variables se pueden seguir los siguientes consejos:
+\begin{itemize}
+    \item Ponerle una letra mayúscula o un guión bajo (\_).
+    \item Ponerle un nombre significativo que se pueda recordar fácilmente.
+    \item No se permiten caracteres especiales o espacios en blanco.
+    \item No se permiten palabras reservados como nombres de variables.
+    \item C++ distingue entre mayúsculas y minúsculas, para tener cuidado nombrando así las variables.
+\end{itemize}
+
+
+
+\section{Operadores primitivos}
+Las operaciones matemáticas que se pueden realizar en Java son las básicas: \textbf{igualdad} (=), \textbf{suma} (+), \textbf{resta} (-), \textbf{multiplicación} (*), \textbf{división} (/) y \textbf{modulo} (\%), estas operaciones se realizan de la misma manera en la que se hacen en ecuaciones u operaciones algebraicas.
+\begin{center}
+    \textit{int num1 = 1, num2 = 2, num3 = 3;\\int suma = num1 + num2 + num3;\\int resta = num3 - num1 - num2;\\int multi = 5 * 4 * num3; //Ejemplos de operaciones matemáticas con los operandos\\int div = num1 / num2; //El valor almacenado en div es un entero, si se busca que se almacene el valor decimal real se requiere un float o double.\\int mod = num2 \% 2; //Almacena el residuo de una división}
+\end{center}
+
+\subsection{Operador de incremento y decremento}
+Como el otros lenguajes, puedes utilizar los operadores de incremento y decremento en variables, se pueden realizar estas operaciones por medio de un \textbf{prefijo} o \textbf{posfijo}:
+\begin{itemize}
+    \item Con prefijo, primero se incrementa o decrementa el valor de la variable, luego se utiliza en un ciclo u operación que se de.
+    \begin{center}\textit{int x = 5;\\int y = ++x; //Incrementa x a 6 y a la variable y se le asigna 6}\end{center}
+    \item Con posfijo, primero se utiliza el valor de la variable en un ciclo u operación, luego se incrementa o decrementa el valor.
+    \begin{center}\textit{int x = 5;\\int y = x++; //A la variable y se le asigna 5 y después incrementa x a 6}\end{center}
+\end{itemize}
+
+\subsection{Operador de asignación}
+Este operador se utiliza en operaciones o variables acumulativas (como para sumar varias calificaciones y luego calcular un promedio) donde a una variable se le asigna su propio contenido, más otro valor, o para incrementar o decrementar una variable más de una unidad o 1, estos operadores de asignación aplican para los operandos existentes:
+\begin{center}
+    \textit{int os = 1, or = 2, om = 3, od = 4, om = 5;\\os += 1; //os = 1 + 1\\or -= 3; //or = 2 - 3\\om *= 5; //om = 3 * 5\\od /= 7; //od = 4 / 7\\om \%= 9; //om = 5 \% 9}
+\end{center}
+
+
+
+\section{Asignación de valores a variables}
+Para dar una entrada de datos en Java, existen varias formas, en esta ocasión, utilizaremos una clase importada para realizar dicha acción. Se debe agregar una clase especial para realizar entrada de datos en un proyecto de Java: la clase \textbf{Scanner} y también debemos crear un objeto de la misma para trabajar con esta clase:\begin{center}\textit{import java.util.Scanner;\\Scanner var = new Scanner(System.in);}\end{center}
+Esta clase contiene distintos procedimientos para leer entradas de un tipo de dato específico:
+\begin{itemize}
+    \item \textbf{nextByte()}: lee un entero byte.
+    \item \textbf{nextShort()}: lee un entero short.
+    \item \textbf{nextInt()}: lee un entero.
+    \item \textbf{nextLong()}: lee un decimal long.
+    \item \textbf{nextFloat()}: lee un decimal float.
+    \item \textbf{nextDouble()}: lee un decimal double.
+    \item \textbf{nextBoolean()}: lee una entrada boleana.
+    \item \textbf{nextLine()}: lee toda una cadena de texto.
+    \item \textbf{next()}: lee únicamente una palabra de una cadena con varias palabras.
+\end{itemize}
+\begin{lstlisting}
+    import java.util.Scanner; //Importa la clase al proyecto
+
+    class App {
+        public static void main(String[ ] args) {
+            String variable;
+            Scanner myVar = new Scanner(System.in); //Crea un objet de la clase importada
+            variable = myVar.nextLine(); //Asigna lo que se lea en la entrada a una variable tipo string
+            System.out.println(myVar.nextLine()); //Despliega lo que se lea en la entrada de datos.
+            System.out.println(variable); //Despliega la variable string
+        }
+    }
+\end{lstlisting}

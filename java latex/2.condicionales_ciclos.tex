@@ -1,0 +1,194 @@
+\section{Condicionales}
+Las estructuras condicionales se utilizar para realizar una acción dependiendo de una condición, existen condicionales dentro de condicionales (anidadas) y condicionales con estructura si- sino si. La estructura básica consiste en la palabra reservada \textbf{if}, seguido de la condición entre paréntesis, y unas llaves de apertura y cierre donde se contiene el código:
+\begin{lstlisting}
+    if (Condición){
+        //Código
+    }
+\end{lstlisting}
+Los \textbf{operadores condicionales} existentes son:
+\begin{itemize}
+    \item \textbf{Mayor que}: >
+    \item \textbf{Menor que}: <
+    \item \textbf{Mayor o igual que}: >=
+    \item \textbf{Menor o igual que}: <=
+    \item \textbf{No es igual}: !=
+    \item \textbf{Es igual}: ==
+\end{itemize}
+\begin{lstlisting}
+    class App{
+        public static void main(String[] args) throws Exception {
+            int num = 5, edad = 16;
+            
+            if (num == 5){ //Condicional if sencilla
+                System.out.println("si es igual");
+            }
+            
+            if (num > 5){ //Condicional if-else
+                System.out.println("es mayor");
+            }else{
+                System.out.println("es menor");
+            }
+            
+            if (edad <= 10){ //Condicional anidada
+                System.out.println("tiene menos de diez años");
+            }else{
+                if (edad > 10 && edad < 18){
+                    System.out.println("tiene entre diez y dieciocho años");
+                }else{
+                    System.out.println("es mayor de edad");
+                }
+            }
+            
+            if (num == 5){ //Condicional si-sino si
+                System.out.println("es cinco");
+            }else if (num > 5){
+                System.out.println("es mayor a cinco");
+            }else{
+                System.out.println("es menor a cinco");
+            }
+        }
+    }
+\end{lstlisting}
+
+
+
+\section{Operadores lógicos}
+Los \textbf{operadores lógicos} son utilizados para juntar varias condiciones y que estas sean cumplidas, por ejemplos, queremos mostrar el mensaje "el número está entre 10 y 20" solamente si un número está entre 10 Y el 20, se deben cumplir ambas condiciones para que se muestre el mensaje deseado. Los \textit{operadores lógicos} disponibles son:
+\begin{itemize}
+    \item \textbf{Y}: AND (\&\&)
+    \item \textbf{O}: OR (||)
+    \item \textbf{No}: NOT (!)
+\end{itemize}
+Recordemos que, si hay tres condiciones utilizando AND en una condicional, y una de ellas no se cumple, toda la condicional no se cumple, en caso de que se utiliza OR en la condicional, y solamente una de ellas se cumple, toda la condicional se cumple. El caso especial NOT indica que, si una condición se cumple en una condicional, el operador NOT la cancela, en caso de que no se cumpla, la cumple.
+
+
+
+\section{Ciclos}
+Un ciclo es un bloque de código que se ejecuta hasta que una condición es cumplida. Pueden ser usados para obtener datos de los usuarios repetidas veces, desplegar información de un arreglo o lista, entre otras cosas.
+
+\subsection{Ciclo while}
+Un \textbf{ciclo while} se repetirá hasta que una condición se cumpla, primero se evalúa la condición y luego se entra al ciclo. Su estructura es:
+\begin{lstlisting}
+    while (Condición){
+        //Código
+        //Instrucción de incremento, decremento que dé salida al ciclo, sino, será infinito.
+    }
+    
+    Ejemplo:
+    
+    int x = 0;
+    while (x < 5){
+        System.out.println(x);
+    }
+\end{lstlisting}
+
+\subsection{Ciclo for}
+Un \textbf{ciclo for} se repetirá un número determinado de veces, se establece un contador, una condición para dar salida al ciclo, y un incremento o decremento del contador, todo en una misma instrucción. Su estructura es:
+\begin{lstlisting}
+    while (Contador/Inicialización; Condición; Incremento/Decremento){
+        //Código
+    }
+    
+    Ejemplo:
+    
+    for (int x = 0; x < 5; x++){
+        System.out.println(x);
+    }
+\end{lstlisting}
+
+\subsection{Ciclo do-while}
+Un \textbf{ciclo do-while} es parecido al while, solo que, en este caso, primero se entra al ciclo y luego se evalúa la condición del ciclo, es decir, el ciclo while primero evalúa, dependiendo de esta evaluación, deja entrar o no al ciclo, por otro lado, el ciclo do-while deja entrar al ciclo por lo menos una vez, luego evalúa la condición. Su estructura es:
+\begin{lstlisting}
+    do {
+        //Código
+        //Instrucción de incremento, decremento que dé salida al ciclo, sino, será infinito.
+    } while (Condición)
+    
+    Ejemplo:
+    
+    int x = 0;
+    do {
+        System.out.println(x);
+        x++;
+    } while (x < 5);
+\end{lstlisting}
+\textit{Nota}: no olvidar poner el punto y coma (;) después de la condición entre paréntesis.
+
+\subsection{Controles de ciclos}
+Podemos utilizar las siguientes palabras reservadas para controlar el flujo de los ciclos:
+\begin{itemize}
+    \item \textbf{break}: si se escribe esta instrucción dentro del ciclo, lo rompe o termina, y pasa directamente a la siguiente instrucción después del ciclo.
+    \item \textbf{continue}: si se escribe esta instrucción dentro del ciclo, ignora el resto de código a partir de donde se escribió la instrucción, y re evalúa la condición del ciclo, en otras palabras, se salta una iteración.
+\end{itemize}
+Ejemplos:
+\begin{lstlisting}
+    int x = 1;
+    
+    while (x < 10){ //Ciclo que se repite 10 veces
+        System.out.println(x); //Imprime x
+        if (x == 6){ //Si x vale 6
+            break; //Rompe y se sale del ciclo
+        }
+        x++;
+    }  
+    System.out.println(x); //Ejecuta esta instrucción después de salirse del ciclo
+    
+    for (x = 10; x <= 50; x += 10){ //Ciclo que se repite hasta que x sea menor igual a 50 y avance de 10 en 10
+        if (x == 20){ //Si x vale 20, se salta el resto de instrucciones después de continue dentro del ciclo
+            continue;
+        }
+        System.out.println(x); //Imprime x
+    }
+\end{lstlisting}
+
+
+
+\section{Condicional switch}
+La condicional \textbf{switch} evalúa una variable en base a un conjunto de valores y se le asigna un comportamiento o tarea a hacer, los componentes de un \textit{switch} son:
+\begin{itemize}
+    \item La entrada: se utiliza la palabra reservada \textit{switch}, seguido de paréntesis, los cuales contendrán la variable a evaluar. En seguida se abren llaves.
+    \item Los casos: son el conjunto de valores con los que se evaluará la variable. Se usa la palabra reservada \textbf{case} y \textbf{dos puntos} (:).
+    \item El código para un caso exitoso: va después de \textit{case (valor):}, simplemente es código que se realizará en caso de que el caso y el valor de la variable coincidan.
+    \item Instrucción \textbf{break}: si esta palabra reservada no se escribe, la condicional switch continuará evaluando la variable por el resto de los casos.
+    \item El caso \textbf{default}: esta palabra reservada es utilizada en caso de que la variable evaluada no coincida con ninguno de los casos. No es necesario utilizar el \textit{break}.
+\end{itemize}
+La estructura de un switch es:
+\begin{lstlisting}
+    switch (variable){
+        case valor1:
+            //Código
+            break;
+        case valor2:
+            //Código
+            break;
+            .
+            .
+            .
+        case valorn:
+            //Código
+            break;
+        default: //Este caso es opcional
+            //Código
+    }
+\end{lstlisting}
+
+\subsection{Expresión switch}
+Se puede utilizar una \textbf{expresión de asignación switch} para asignarle un valor a una variable en base a una estructura switch y sus caso. Lo primero que debemos hacer es tener una variable auxiliar que será utilizada para evaluar en el switch, y en base a los casos existentes, se le asigna un valor a una variable. Ejemplo:
+\begin{lstlisting}
+    import java.util.Scanner; //Importa la clase para entrada de datos
+    
+    public class Program
+    {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in); //Crea un objeto de la clase Scanner
+            int day = sc.nextInt(); //Asignación de un valor a la variable
+            String dayType  = switch(day) { //Asignación de un switch a la variable
+                case 1, 2, 3, 4, 5 -> "Working day"; //En caso de que el valor de day esté entre 1 y 5, se le asigna una cadena a la variable
+                case 6, 7 -> "Weekend"; //En caso de que el valor de day sea 6 o 7, se le asigna una otra cadena en la variable
+                default -> "Invalid day"; //En caso de que no coincida ningún caso con el valor de day, se le asigna otra cadena en la variable
+            };
+        System.out.println(dayType); //Despliegue de resultados.
+    }
+} 
+\end{lstlisting}
+\textit{Nota}: hay que darse cuenta que se utiliza \textbf{->} para trabajar con los casos, y ninguno de estos tiene la palabra \textit{break}.

@@ -1,0 +1,689 @@
+\section{POO}
+Java trabaja con la programación orientada a objetos, es decir, clases, objetos, métodos y atributos.
+\subsection{Clases y objetos}
+Una clase es una plantilla que representa un objeto, situación o estado de la vida real, una clase es una representación de un objeto de la realidad. Una clase está constituida por sus \textbf{atributos} (características), \textbf{comportamiento} (métodos, que son lo mismo que funciones y procedimientos), \textbf{acceso a las clases} (modificadores de acceso), \textbf{objetos} (objeto naciente o generado a partir de la clase, con el cual se va a trabajar), \textbf{constructores y destructores} (estado cuando se crea un objeto y cuando se elimina), entre otra consideraciones que veremos más adelante.
+
+\subsubsection{Creando una clase en VSCode}
+Dependiendo del editor de texto o IDE donde se esté trabajando, hay distintos pasos para crear una clase de manera visual o por medio de formularios, sin embargo, la forma para hacer en VSCode es ubicándonos en el árbol de trabajo del proyecto en el Explorador lateral, vemos que una de las carpetas del proyecto en Java es \textit{src}, damos clic derecho sobre esa carpeta, y damos clic a la opción de \textit{New File}, le damos el nombre que queramos al archivo, pero tiene que tener una terminación \textbf{.java}; una vez hecho esto, tenemos una clase creada.
+
+\subsubsection{Creando una clase por código}
+Si no se está trabajando en VSCode, en el mismo archivo App de código fuente de nuestro código, escribimos lo siguiente:\begin{center}\textit{$<$Modificador acceso$>$ class $<$Nombre clase$>$ \{ //Instrucciones \}}\\public class Persona\{ //Instrucciones \}\end{center}
+Los \textit{modificadores de acceso} se verán más adelante. Ya con nuestra clase creada, le crearemos un método que simplemente despliega el mensaje \textit{Una persona camina}:
+\begin{lstlisting}
+    public class Persona{
+        void Caminar(){
+            System.out.println("Una persona camina");
+        }
+    }
+\end{lstlisting}
+\textit{Nota}: el modificador de acceso es opcional, tanto en la declaración de la clase, como en la de sus métodos y atributos; si no se le define un modificador de acceso, la clase y su contenido será \textbf{public}.
+
+\subsubsection{Creando un objeto}
+Con esta clase y método, podemos crear un objeto de la misma para acceder a su contenido. La estructura para crear un objeto es:\begin{center}\textit{$<$Clase$>$ $<$Nombre objeto$>$ = new $<$Clase$>$(); //Declara el objeto\\$<$Nombre objeto$>$.$<$Métodos de la clase$>$}\end{center}
+De esta manera, creamos el objeto \textit{persona} de la clase \textit{Persona} y, por medio de un punto (.), podemos utilizar su método \textit{Caminar}:
+\begin{lstlisting}
+    public class Persona{
+        void Caminar(){
+            System.out.println("Una persona camina");
+        }
+    }
+    
+    public class Main {
+        public static void main(String[] args) {
+            Persona persona = new Persona();
+            persona.Caminar();
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Métodos}
+Los métodos definen el comportamiento de una clase y, por ende, sus objetos. Podemos definir los los métodos de una clase por medio de la siguiente estructura:\begin{center}\textit{$<$Modificador acceso$>$ $<$Tipo retorno$>$ $<$Nombre método$>$($<$Parámetros$>$)\{ //Instrucciones \}}\end{center}
+Hemos mencionado mucho sobre modificadores de acceso y otros términos que quizás no están muy claros, por lo que los recapitulamos (más adelante serán detallados):
+\begin{itemize}
+    \item \textbf{Modificador de acceso}: permite el acceso de otros métodos de la clase o partes del código al método que estamos creando.
+    \item \textbf{Tipo retorno}: determina si la función regresa un valor o cumple con una serie de instrucciones simplemente, pero no regresa valor.
+    \item \textbf{Nombre método}: un nombre para la función. Tomen en cuenta de que un método no suele comenzar con un número, comienza con mayúsculas o tiene un nombre significativo.
+    \item \textbf{Parámetros}: un método puede recibir valores por medio de parámetros para utilizarlos en su funcionamiento. Están constituidos por el tipo de dato, y su nombre, están separados por medio de comas (,).
+\end{itemize}
+Solo recordemos que los tips anteriores son recomendaciones para nombrar variables, funciones, métodos, procedimientos o atributos, no son reglas establecidas por el lenguaje. Para poder llamar a un método desde otra sección de código escribimos su nombre, el par de paréntesis, y dentro de ellos, sus parámetros (si el método los tiene). A continuación, ejemplos de métodos:
+\begin{lstlisting}
+    import java.util.Scanner;
+    
+    public static void Despliegue(int res){ //Crea un método que despliega el resultado de la suma
+        System.out.println(res);
+    }
+    
+    public static void Suma(int a, int b){ //Crea un método que recibe dos parámetros enteros para sumarlos
+        int res; Declaración de variable de resultado
+        res = a + b; //Asignación de la suma de parámetros a la variable
+        Despliegue(res); //Llamada al método de despliegue de resultado
+    }
+    
+    public class Main{
+        public static void main(String[] args){
+            int a, b;
+            Scanner lectura = new Scanner(System.in); //Declaración de variables
+            
+            a = lectura.nextInt();
+            b = lectura.nextInt(); //Asignación de valores a las variables
+            
+            Suma(a, b); //Llamada al método de suma de valores
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Atributos de clases}
+Los \textbf{atributos} de una clase conforman las características que esta tiene. Los atributos están compuestos por:\begin{center}\textit{$<$Modificador de acceso$>$ $<$Tipo dato$>$ $<$Nombre atributo$>;$}\end{center}
+Siguiente el ejemplo de Persona, crearemos algunos atributos para esta clase.
+\begin{lstlisting}
+    public class Persona{
+        double Altura;
+        double Peso;
+        String Nombre;
+        int Edad;
+    
+        void Caminar(){
+            System.out.println("Una persona camina");
+        }
+    }
+\end{lstlisting}
+Ahora, cuando declaramos un objeto Persona, este objeto tendrá los atributos de la clase disponibles para que se les asigne algún valor, como podemos ver en el siguiente ejemplo:
+\begin{lstlisting}
+    import java.util.Scanner;
+    
+    public class Persona{ //Declaración de la clase
+        double Altura;
+        double Peso;
+        String Nombre;
+        int Edad; //Declaración de distintos atributos
+    
+        void Caminar(){ //Método que despliega que la persona camina 
+            System.out.println("\n" + Nombre + " camina");
+        
+        void InfoPersona(){ //Método que despliega la información de la persona ingresada en el main
+            System.out.println("El nombre de la persona es: " + Nombre);
+            System.out.println("La edad de la persona es: " + Edad);
+            System.out.println("El peso de la persona es: " + Peso + " kg");
+            System.out.println("La altura de la persona es: " + Altura + " cm\n");
+        }
+    }
+    
+    public class Main{
+        public static void main(String[] args){
+            String nom;
+            double peso, altura;
+            int edad; //Declaración de variables
+            Scanner lectura = new Scanner(System.in);
+            Persona persona = new Persona(); //Declaración de objetos
+            
+            nom = lectura.nextLine();
+            peso = lectura.nextDouble();
+            altura = lectura.nextDouble();
+            edad = lectura.nextInt(); //Asignación de valores a las variables
+            
+            persona.Nombre = nom;
+            persona.Edad = edad;
+            persona.Peso = peso;
+            persona.Altura = altura; //Asignación de valores a los atributos del objeto persona
+            
+            persona.InfoPersona(); //Llamada al método que despliega la información de la persona
+            persona.Caminar(); //Llamada al método que despliega que la persona camina
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Modificadores de acceso}
+Los \textbf{modificadores de acceso} permiten que otras partes del código accedan a un atributo o método de una clase, a una función o procedimiento, para cuidar la integridad de su contenido. Los valores que pueden adpotar los modificadores de acceso son:
+\begin{itemize}
+    \item Para declarar clases, existen:
+        \begin{itemize}
+            \item \textbf{public}: el que más hemos visto hasta ahora, permite que otras clases accedan a la que se está declarando.
+            \item \textbf{default}: no es una palabra reservada, simplemente se declara la clase sin ningún modificador, permite que todas las clases en el mismo paquete accedan a la que se está declarando.
+        \end{itemize}
+    \item Para declarar atributos y métodos de una clase, existen:
+        \begin{itemize}
+            \item \textbf{default}: no es una palabra reservada, simplemente se declara el atributo o método sin algún modificador, permite que otra clase en el mismo paquete acceda o pueda trabajar con el atributo o método que se está declarando.
+            \item \textbf{public}: permite que otra clase acceda o pueda trabajar con el atributo o método que se está trabajando.
+            \item \textbf{protected}: permite que, si la clase tiene una clase derivada, la clase derivada pueda acceder a los atributos o métodos de su clase padre.
+            \item \textbf{private}: permite que el atributo o método solo sea accedido o trabajado dentro de la misma clase, no por fuera.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Tipo de retorno de métodos}
+Mencionamos que un método puede regresar o no un valor, esto lo determinamos creando el método, después de definir un modificador de acceso, definimos que nuestro método es del tipo int, double, float, string, etc;
+Con esto hecho, el método solicitará que se le asigne algún valor a retornar del mismo tipo que el método, la palabra reservada para lograr esto es \textbf{return}, justo como las funciones sencillas fuera de clases.
+\begin{lstlisting}
+    class MyClass{
+        static int sum(int val1, int val2){
+            return val1+val2;
+        }
+        public static void main(String[]args){
+            intx=sum(2, 5);
+            System.out.println(x);
+        }
+    }
+\end{lstlisting}
+Por lo que, ahora sabemos o recordamos que:
+\begin{itemize}
+    \item Las métodos y procedimientos tienen un modificador de acceso y un tipo de dato de retorno.
+    \item Las funciones siempre regresan un tipo de dato.
+    \item La palabra \textit{return} es la que indica que la función regresa alguna instrucción que represente un tipo de dato que sea el mismo que la del método o función.
+    \item La palabra \textit{void} indica que un procedimiento o método no regresan ningún valor.
+\end{itemize}
+\textit{Nota}: un método o función puede tener como parámetros dos doubles, pero regresar un int.
+
+\subsubsection{Tipos de valores y referencias}
+Algo que debemos tener a consideración es que, cuando hacemos una llamada a un método, función o procedimiento, y les pasamos una variable como parámetro, lo que realmente le pasamos a estas es una copia del valor de la variable, no el valor de la variable en sí, veamos el siguiente ejemplo:
+\begin{lstlisting}
+    public class MyClass{
+        public static void main(String[]args){
+            int x = 5; //Declara una variable con valor 5
+            addOneTo(x); //Llama al procedimiento de suma mandando el valor 5
+            System.out.println(x); //Imprime 5
+        }
+        static void addOneTo(int num){ //Declara una función que recibe un parámetro para sumarle 1
+            num=num+1; //Al parámetro le suma 1
+        }
+    }
+\end{lstlisting}
+En realidad, no podemos pensar que la impresión debe ser 6, porque en ningún momento se le regresa 6 a main, el 5 que mandamos de main a addOneTo es solo un valor, no la variable x como tal.\\
+Sin embargo, esto no ocurre con lo objetos. Cuando una función o procedimiento tiene como parámetro un objeto de una clase X, el parámetro se convierte en un \textbf{valor referencia}. Un valor referencia es la dirección de memoria de un dato, lo podemos ver como un acceso directo de un programa en un sistema operativo, solamente que cualquier cosa que se le haga a la referencia, se verá reflejado en el dato original\\
+Entonces, si una función o procedimiento tiene como parámetro un tipo de dato, este se convierte en un \textit{valor tipo}, si tiene como parámetro un objeto de clase, se convierte en \textit{una referencia}. Podemos apreciarlo en el siguiente ejemplo (asumiendo que existe una clase llamada Person):
+\begin{lstlisting}
+    public class MyClass{
+        public static void main(String[]args){
+            Person j; //Declara un objeto Person
+            j=new Person("John"); //Se inicializa con un nombre "John"
+            j.setAge(20); //Se le asigna 20 a su atributo Age
+            celebrateBirthday(j); //Llamada al procedimiento que agrega 1 a la edad del objeto J
+            System.out.println(j.getAge()); //Imprime la edad aumentada
+        }
+        static void celebrateBirthday(Person p){ //Procedimiento que tiene como parámetro un objeto Persona, por lo que, cualquier cosa que se le haga al objeto que se le pase como parámetro, le pasará al objeto en sí.
+            p.setAge(p.getAge()+1);
+        }
+    }
+\end{lstlisting}
+\textit{Nota}: los strings y arreglos también son tratados como referencias en los parámetros.
+
+\subsubsection{Constructores}
+Un \textbf{constructor} es un método que es llamado cuando se crea un objeto de una clase, los constructores están caracterizados porque no requieren modificador de acceso ni algún tipo de retorno (un tipo de dato o void), sin embargo, el constructor debe tener el mismo nombre de la clase donde se está declarando.\\
+Los constructores suelen ser usados para inicializar un objeto de una clase con ciertos valores de atributos, además, una clase puede tener más de un constructor. Para declarar un objeto y verlo en funcionamiento, podemos ver el siguiente ejemplo:
+\begin{lstlisting}
+    import java.util.Scanner;
+    
+    public class Persona{ //Declaración de clase
+        private String Nombre;
+        private int Edad; //Declaración de atributos privados
+        
+        Persona(String nom, int ed){ //Declaración de constructor con atributos para que, cuando se llame al constructor, asigne valores a los atributos, es decir, inicialice un objeto
+            this.Nombre = nom;
+            this.Edad = ed;
+        }
+        
+        public void Despliegue(){ //Declaración de un método que despliega el contenido de los atributos de la clase
+            System.out.println("Nombre: " + Nombre + ". Edad: " + Edad);
+        }
+    }
+    
+    public class Main{
+        public static void main(String[] args){
+            Scanner lectura = new Scanner(System.in);
+            String nom;
+            int ed; //Declaración de variables
+            
+            nom = lectura.nextLine();
+            ed = lectura.nextInt(); //Asignación de valores a las variables
+            
+            Persona persona = new Persona (nom, ed); //Declaración de un objeto Persona y se le pasa como parámetro las variables nom y edad, para llamar al constructor
+            persona.Despliegue(); //Llamada al método que despliega la información de la persona
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{\textit{Static} y tipos constantes \textit{Final}}
+La palabra reservada \textbf{static} en una clase es utilizada para crear una variable o arreglo que pueda ser utilizado por todos los objetos que nazcan de dicha clase, a su vez que a las clases derivadas, es decir que, si creamos cinco objetos de la clase Persona, y la clase persona tiene una variable \textit{static}, todos los objetos Persona pueden acceder a la variable estática y su contenido; si creamos variables estáticas en la clase principal del proyecto (Class, App o algún otro nombre), estas variables pueden ser utilizadas por todas las clases, funciones, procedimientos y el main, en otras palabras, creamos una \textbf{variable global}. Este concepto de estático aplica a variables, procedimientos y funciones. Lo veremos en el siguiente ejemplo.
+\begin{lstlisting}
+    import java.util.Scanner;
+    
+    public class Persona{ //Declaración de clase
+        public static Nombre = "Mario"; //Declaramos una variable estática pública
+    }
+    
+    public class Main{
+        public static void main(String[] args){
+            Scanner lectura = new Scanner(System.in);
+            String nom; //Declaración de variables
+            
+            nom = lectura.nextLine(); //Asignación de valores a las variables
+            
+            Persona persona1 = new Persona();
+            Persona persona2 = new Persona();
+            Persona persona3 = new Persona(); //Declaración de objetos Persona
+            
+            System.out.println(persona1.Nombre);
+            System.out.println(persona2.Nombre);
+            System.out.println(persona3.Nombre); //Las tres anteriores instrucciones despliegan el nombre Mario
+        }
+    }
+\end{lstlisting}
+Ahora bien, la palabra reservada \textbf{final} sirve para declarar variables constantes, es decir, solo pueden tener una asignación, ya compilado y en ejecución, dicho valor no puede cambiar. Funciones y procedimientos pueden ser asignados también como \textit{final}, para evitar la sobrecarga de los mismos. Un ejemplo de declaración:\begin{center}\textit{public static final double PI = 3.1416;}\end{center}
+
+\subsection{Conceptos de POO}
+\subsubsection{Encapsulación}
+La idea de la \textbf{encapsulación} es que la implementación de un programa y sus detalles estén escondidos del usuario final, por ejemplo, no queremos que un usuario tenga acceso al valor de todo el dinero que tiene ahorrado en una cuenta bancaria, sino, este lo agrandaría para tener más dinero del que tiene. La \textit{encapsulación} controla el acceso a los datos de un sistema o programa, permite que cambiemos algunos valores sin realizar grandes modificaciones a un programa. El ejemplo claro sobre la encapsulación visual es que declaremos atributos o métodos de una clase en \textbf{private}, así, ni otras clases fuera de la que se está declarando pueden acceder a dichos atributos. Un ejemplo de esto en código es:
+\begin{lstlisting}
+    class BankAccount { //Declara clase
+        private double balance=0; //Declara atributo privado
+        public void deposit(double x) { //Declara método público para incrementar el valor del atributo
+            if(x > 0) {
+                balance += x;
+            }
+        }
+    }
+\end{lstlisting}
+En el ejemplo anterior, no podemos modificar directamente el valor del atributo privado, esto solo es posible por medio de un método público.
+
+\subsubsection{Herencia}
+La \textbf{herencia} es el proceso de pasar los atributos y métodos de una clase (llamada \textbf{clase padre, superclase o base}) a otra clase (llamada \textbf{clase derivada, subclase o hija}), estos atributos y métodos se pasan según el \textit{modificador de acceso} que tenga, en Java, si algún atributo o método de una superclase es \textit{private}, este atributo o método no se hereda a una subclase. en cambio, cualquier atributo \textit{public} o \textit{protected} si se heredan. Para heredar de una clase a otra, debemos utilizar la palabra reservada \textit{extend}, como en el siguiente ejemplo:
+\begin{lstlisting}
+    public class Persona{ //Declara una calse Persona con un atributo y método
+        private String Nombre;
+        
+        public void setNombre(String nom){
+            this.Nombre = nom;
+        }
+    }
+    
+    class Anciano extends Persona{ //Declara una clase Anciano que hereda de Persona su contenido
+        public void Info(){
+            System.out.println("Mi nombre es:" + Nombre); //Podemos utilizar el atributo Nombre de Persona porque Anciano lo heredó de dicha clase
+        }
+    }
+\end{lstlisting}
+Debes tomar en cuenta que un \textbf{constructor} es único para cada clase, cuando se hereda de una clase a otra, el constructor de la superclase no se hereda, sin embargo, cuando se crea un objeto de la subclase, se llama primero al constructor de la superclase, después el constructor de la subclase.\\
+Para \textbf{declarar} un objeto de una subclase, utilizamos la instrucción del siguiente ejemplo:
+\begin{lstlisting}
+    public static void main(String[] args){
+        Persona viejo = new Anciano(); //Primero se escribe el nombre de la superclase, después de new, el nombre de la subclase
+    }
+\end{lstlisting}
+
+\subsubsection{Polimorfismo}
+El \textbf{polimorfismo} es el pensamiento de que algo tiene "muchas formas", es decir, un ser vivo (a menos que sean seres vivos inertes) se mueve, se desplaza, camina, en nuestro caso, retomamos la clase Persona, una persona camina, ahora, un niño, un adulto, un adolescente y un anciano caminan a distintas velocidades, \textbf{caminar} se convierte en algo distinto dependiendo del sujeto o ser que lo lleve a cabo, eso es el \textit{polimorfismo}, que una acción pueda tener distinta implementación o comportamiento dependiendo el objeto u origen.
+A continuación, un ejemplo en código:
+\begin{lstlisting}
+    class Animal{ //Declara superclase
+        public void Sonido(){
+            System.out.println("Grrrrr"); //Declara método a heredar
+        }
+    }
+    
+    class Perro extends Animal{ //Declara subclase 1
+        public void Sonido(){
+            System.out.println("Grrrrr");
+        }
+    }
+    
+    class Gato extends Animal{ //Declara subclase 2
+        public void Sonido(){
+            System.out.println("Grrrrr");
+        }
+    }
+    
+    //Ambas subclases tienen el mismo método que la superclase, pero tienen un código distinto que las caracteriza
+    
+    public static void main(String[] args){
+        Animal perro = new Perro(); //Crea un objeto Perro que hereda el contenido de Persona
+        Animal gato = new Gato(); //Crea un objeto Gato que hereda el contenido de Persona
+        
+        perro.Sonido();
+        gato.Sonido(); //Ambas llaman al mismo método, pero el resultado es distinto
+    }
+\end{lstlisting}
+\textbf{Sobrecarga y sobre escritura}\\
+Otro ejemplo para comprender este término es el sonido de los animales, podemos crear una superclase \textit{Sonido}, la cual tiene un método protegido \textit{Sonido}, sabemos que los animales hacen ciertos ruidos para comunicarse, si declaramos una subclase de Animal llamada \textit{Perro} y \textit{Gato}, cada uno hace un ruido distinto, son animales los dos, pero su sonido se diferencia, eso es polimorfismo, pero también lo podemos relacionar con la \textbf{sobrecarga} o \textbf{sobre escritura} de métodos, porque si hacemos memoria, cuando hacemos alguna de las dos acciones con funciones o procedimientos estáticos, redefinimos el comportamiento del procedimiento o clase según nuestras necesidades, es similar en el polimorfismo.\\
+Para sobre escribir una función o método, debemos seguir las siguientes reglas:
+\begin{itemize}
+    \item El nombre del mismo debe ser igual al original y el modificador de acceso de la función/procedimiento sobre escrito debe ser \textbf{menos restrictivo} que el del original.
+    \item Una función, procedimiento o método declarado como \textbf{final} y \textbf{static} no se pueden sobre escribir.
+    \item Si un método no se puede heredar, no se puede sobre escribir.
+    \item Constructores no se pueden sobre escribir.
+    \item El método, función o procedimiento original y sobre escrito deben tener la misma cantidad de parámetros.
+\end{itemize}
+Cuando un procedimiento, función o método tiene el mismo nombre, pero distinta cantidad de parámetros, este método es \textbf{sobrecargado}, esto es útil cuando el mismo método debe tener distinto comportamiento en base a distintos parámetros. Un ejemplo:
+\begin{lstlisting}
+    import java.util.Scanner;
+    
+    class Persona{ //Declara clasd
+        public void Caminar(){ //Declara método original
+            System.out.println("Camina rápido");
+        }
+        public void Caminar(String men){ //Declara método sobre escrito
+            System.out.println(men);
+        }
+    }
+    
+    static void Suma(int a, int b){ //Declara función original
+        return a + b;
+    }
+    
+    static void Suma(double a, double b){ //Declara función sobrecargada
+        return a + b;
+    }
+    
+    public static void main(String[] args){
+        Persona p = new Persona(); //Declara objeto Persona
+        Scanner lectura = new Scanner(System.in);
+        
+        String men = lectura.nextLine(); //Declaración y asingación de valor a la variable
+        
+        p.Caminar(); //Llamada al procedimiento original
+        p.Caminar(men); //Llamada al procedimiento sobre escrito
+        
+        System.out.println(Suma(1.1, 2.2)); //Llamada a la función estática original
+        System.out.println(Suma(1, 2)); //Llamada a la función estática sobrecargada
+    }
+\end{lstlisting}
+
+\subsubsection{Abstracción}
+La \textbf{abstracción} es el pensamiento sobre el concepto de un objeto, más no sus características, por ejemplo, un libro: cuando mencionan dicha palabra, todos sabemos a qué nos referimos, pero no pensamos inmediatamente en cuántas páginas tiene un libro, ni su autor, ni tamaña, no imprenta, pensamos en su concepto, en la programación, esto es aplicable a clases abstractas, como lo puede ser en algún ejemplo anterior donde una superclase Animal tiene el método Caminar, y todas sus subclases heredan dicho método, pero con distinta implementación o bloque de código; la aplicación de la abstracción a esta clase sería hacer que este método sea abstracto y, por ende, toda la clase Animal se vuelve abstracta, y así todas las subclases de esta superclase heredan el método abstracto y pueden darle la implementación que deseen. Esto es un complemento del \textit{polimorfismo} y la \textit{sobrecarga y sobre escritura} de métodos\\
+Para crear una \textbf{clase abstracta}, debemos utilizar la palabra reservada \textbf{abstract}, y algunas características sobre este tipo de declaraciones son:
+\begin{itemize}
+    \item Si una clase es declarada, esta \textbf{no puede instanciarse}, es decir, no podemos declarar objetos de la misma.
+    \item Para utilizar una clase abstracta, debemos primero heredarla de otra superclase.
+    \item Cualquier clase que tenga métodos abstractos debe ser abstracta.
+    \item Un método abstracto es declarado, pero no tiene un bloque de código, esto es porque será reacondicionado por otra subclase (\textit{abstract void Caminar();}).
+\end{itemize}
+Un ejemplo de lo anterior:
+\begin{lstlisting}
+    abstract class Animal{ //Declara superclase abstracta, no se pueden crear objetos de la misma
+        public abstract void Sonido(){} //Declara método abstracto sin implementación
+    }
+    
+    class Perro extends Animal{ //Declara subclase 1
+        public void Sonido(){
+            System.out.println("Grrrrr");
+        }
+    }
+    
+    class Gato extends Animal{ //Declara subclase 2
+        public void Sonido(){
+            System.out.println("Grrrrr");
+        }
+    }
+    
+    //Ambas subclases tienen el mismo método que la superclase, pero al ser abstracto, se les puede dar una implementación distinta a cada uno
+    
+    public static void main(String[] args){
+        Perro perro = new Perro(); //Crea un objeto Perro
+        Gato gato = new Gato(); //Crea un objeto Gato
+        
+        perro.Sonido();
+        gato.Sonido(); //Ambas llaman al mismo método, pero el resultado es distinto
+    }
+\end{lstlisting}
+
+
+
+\section{Métodos especiales}
+\subsection{Getters y Setters}
+Como en CSharp, en el cual existe una herramienta que te permite asignar valores a los atributos de una clase mediante la instrucción \textbf{get} y \textbf{set}, aquí ocurre lo mismo, se crea un método que regresa el valor de un atributo privado donde el nombre del método comienza con \textit{get} y continua con el nombre del atributo; de igual forma, se crea otro método donde el nombre del mismo comienza con \textit{set} y continua con el nombre del atributo; ambos métodos pueden tener el modificador \textit{public}. Declaramos un atributo llamado Color con modificador private, para cuidar su contenido y acceso, posteriormente, creamos los siguientes métodos:
+\begin{lstlisting}
+    public class Auto{
+        private String color; //Atributo de prueba privado
+        
+        public String getColor(){ //Al llamar a este método, obtenemos el valor contenido en el atributo color
+            return color;
+        }
+        
+        public void setColor(String c){ //Al llamar este método, pasándole un valor string por el parámetro, asignamos el parámetro al atributo
+            this.color = c;
+        }
+    }
+\end{lstlisting}
+La \textbf{función} del \textit{getter} y \textit{setter} es que asignemos y obtengamos el valor de atributos que tengan modificador de acceso privado. Una vez declarados, podemos utilizar los getters y setters en el main.
+
+\subsection{La clase Math}
+Para realizar distintas operaciones matemáticas en Java, tenemos la clase \textbf{Math} para facilitarnos el trabajo, no es necesario declarar un objeto de la clase, simplemente debemos ingresar la palabra reservada \textit{Math} para utilizarla. Entre algunas de los métodos de esta clase tenemos:
+\begin{itemize}
+    \item \textbf{Math.abs(-20)}: regresa el valor absoluto del parámetro. Regresa 20.
+    \item \textbf{Math.ceil(4.75)}: redondea el valor decimal del parámetro a su entero más cercano. El valor de retorno es un \textbf{double}. Regresa 5.0
+    \item \textbf{Math.floor(4.75)}: redondea el valor decimal del parámetro a su entero más cercano. El valor de retorno es un\textbf{entero}. Regresa 5
+    \item \textbf{Math.max(3, 4) y Math.min(3, 4)}: regresa el mayor o mínimo de una serie de números. Regresa 4 y 3.
+\end{itemize}
+
+\subsection{El método \textit{equals()}}
+Cuando se trata de comparar dos objetos de una misma clase, no podemos utilizar el operador de comparación \textbf{==}, ya que los objetos hacen referencia a una dirección de memoria, entonces, al compararlos con este operador, verá que la dirección de memoria es distinta, por lo que el resultado siempre será \textit{false}. Para comparar exitosamente dos objetos de una misma clase, se requiere utilizar el método \textbf{(equals())}, pero no se usa así nada más, este método de ser \textbf{sobre escrito}, y acompañarlo con el método \textbf{hashCode()}.\\
+Para lograr esto, en tu editor de texto o IDE, puedes dar clic derecho sobre el nombre de la clase con la que se desee comparar objetos, en la opción \textit{Source} o \textit{Source Action}, seleccionamos la opción \textit{Generate hasCode() and equals()...}, esta opción te genera automáticamente la sobre escritura de los métodos y su respectivo bloque de código para poder comparar objetos de la misma clase. Un ejemplo de equals:
+\begin{lstlisting}
+    public static class A{ //Declara una clase con atributo tipo int sencillo
+        public int x;
+        
+        //Se generó el código de hashCode() y equals() con el procedimiento descrito anteriormente
+        //Ya se puede utilzar el método equals(), si no se genera este código, no se puede utilzar correctamente
+        
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + x;
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            A other = (A) obj;
+            if (x != other.x)
+                return false;
+            return true;
+        }
+    }
+    
+    public static void main(String[] args){
+        A clase1 = new A(); //Declara tres objetos de la clase A, cada objeto recibe un valor en su atributo
+        clase1.x = 5;
+        A clase2 = new A();
+        clase2.x = 5
+        A clase3 = new A();
+        clase3.x = 6;
+        
+        if (clase1.equals(clase2)){ //Despliega Iguales
+            System.out.println("Iguales"); 
+        }
+        else{
+            System.out.println("No iguales");
+        }
+        if (clase2.equals(clase3)){ //Despliega No iguales
+            System.out.println("Iguales");
+        }
+        else{
+            System.out.println("No iguales");
+        }
+    }
+\end{lstlisting}
+
+\subsection{Enums}
+Los \textbf{enums} son un tipo de dato especial, parecido a un arreglo, que se utiliza para declarar una colección de datos constantes (no se puede cambiar el valor), para acceder a los valores de un \textit{enum}, utilizamos un \textbf{punto (.)}, en vez de índices. Para declarar un enum, utilizamos la siguiente estructura:\begin{center}\textit{$<$Modificador de acceso$>$ enum $<$Nombre enum$>$ \{$<$Val1$>$, $<$Val2$>$, ..., $<$ValN$>$\}}\end{center}
+Y para declarar un objeto de un enum, seguimos el siguiente estructura:\begin{center}\textit{$<$Nombre enum$>$ $<$Nombe variable$>$ = $<$Nombre enum$>$.$<$Valor de enum$>$}\end{center}
+Podemos seguir el siguiente ejemplo:
+\begin{lstlisting}
+    class Main {
+        public static void main(String[] args) {
+            Player player1 = new Player(Difficulty.EASY);
+            Player player2 = new Player(Difficulty.MEDIUM);
+            Player player3 = new Player(Difficulty.HARD); //Se declaran 3 objetos Player que se les pasa como parámetro un valor del enum Difficulty
+        }
+    }
+
+    enum Difficulty {EASY, MEDIUM, HARD} //Declara un enum y le asigna valores
+
+    public class Player{ //Declara clase
+        Player(Difficulty diff){ //Declara constructor con parámetro tipo enum
+            switch(diff){ //Crea un switch para evaluar el valor del parámetro
+                case EASY: //No es necesario escribir "" para valores de enum (en caso de que sean una cadena o caracter)
+                    System.out.println("You have 3000 bullets");
+                    break;
+                case MEDIUM:
+                    System.out.println("You have 2000 bullets");
+                    break;
+                case HARD:
+                    System.out.println("You have 1000 bullets");
+                    break;
+            }
+        }
+    }
+\end{lstlisting}
+
+
+
+\section{Paquetes}
+Los \textbf{paquetes} podemos verlos como carpetas de clases, así tenemos más orden en los archivos de clases que creemos, además de dar un control adicional de acceso a dichas clases.\\
+Para crear un \textit{paquete}, en nuestro editor de texto o IDE, en la carpeta src, damos clic derecho y damos clic a la opción New Folder, asignamos un nombre y finalizamos el proceso. Cuando una clase es agregada al paquete, aparecerá la instrucción \textit{package $<$Nombre clase$>$} para indicar a qué paquete pertenece la clase.\\
+Si queremos utilizar una clase de un paquete, debemos utilizar la siguiente instrucción en la cabecera de nuestro archivo principal:\begin{center}\textit{import $<$Nombre paquete$>$.$<$Nombre clase$>$;}\end{center}
+Si queremos importar todas las clases de un paquete, podemos utilizar un \textbf{asterisco (*)} después del nombre del paquete (sin el punto) para ahorrarnos líneas de código. Un ejemplo de paquetes (asumiendo que existe la clase Persona en un paquete Clases):
+\begin{lstlisting}
+    import java.util.Scanner;
+    import Clases.Persona; //Importa la clase Persona del paquete Clases
+    
+    public class Main{
+        public static void main(String[] args){
+            Scanner lectura = new Scanner(System.in);
+            String nom; //Declaración de variables
+            
+            nom = lectura.nextLine(); //Asignación de valores a las variables
+            
+            Persona persona1 = new Persona();
+            Persona persona2 = new Persona();
+            Persona persona3 = new Persona(); //Declaración de objetos Persona
+            
+            System.out.println(persona1.Nombre);
+            System.out.println(persona2.Nombre);
+            System.out.println(persona3.Nombre); //Las tres anteriores instrucciones despliegan el nombre Mario
+        }
+    }
+\end{lstlisting}
+Utilizamos un ejemplo anterior, pero en vez de tener declarada la clase en el archivo principal, está contenida en un paquete y la importamos para trabajar con ella.
+
+\subsection{API de Java}
+Java contiene una serie de clases e interfaces generales que pueden ser utilizadas por todos en sus proyectos, es una cortesía del lenguaje que se encuentra en el enlace .\\
+Una vez consultadas todas las clases e interfaces, seleccionamos alguna y la importamos a nuestro proyecto, recordemos que para importar utilizamos la estructura:\begin{center}\textit{import java.$<$Nombre librería API$>$.$<$Nombre clase de librería$>$;}\end{center}
+Por ejemplo:\begin{center}\textit{import java.awt.*;}\end{center}
+Recordemos que el asterisco (*) en la instrucción import sirve para seleccionar todas las clases dentro de una librería.
+
+
+
+\section{Interfaces}
+Una \textbf{interface} es una clase completamente abstracta, se utiliza la palabra reservada \textbf{interface}, donde alguna de sus características son:
+\begin{itemize}
+    \item Contiene nada más variables \textbf{static final}.
+    \item No tiene un constructor debido a que este tipo de clases no pueden ser instanciadas.
+    \item Se puede heredar el contenido de una interface a otra.
+    \item Una clase regular puede implementar más de una interface, estas se separan utilizando una coma (,).
+    \item Todos los métodos tienen implícitamente el modificador de acceso \textbf{public}.
+    \item Cuando implementas una interface en una clase, tienes que sobre escribir todos los métodos de la interface en la clase.
+\end{itemize}
+Seguimos con el ejemplo de la clase Animal, pero implementando interfaces:
+\begin{lstlisting}
+    interface Animal{ //Declara superclase abstracta, no se pueden crear objetos de la misma
+        void Sonido(); //Declara método abstracto sin implementación
+        void Caminata();
+    }
+    
+    class Perro implements Animal{ //Declara subclase 1
+        public void Sonido(){
+            System.out.println("Guau");
+        }
+    }
+    
+    class Gato implements Animal{ //Declara subclase 2
+        public void Sonido(){
+            System.out.println("Miaw");
+        }
+    }
+    
+    public static void main(String[] args){
+        Perro perro = new Perro(); //Crea un objeto Perro
+        Gato gato = new Gato(); //Crea un objeto Gato
+        
+        perro.Sonido();
+        gato.Sonido(); //Ambas llaman al mismo método, pero el resultado es distinto
+    }
+\end{lstlisting}
+
+
+
+\section{Casting}
+El término \textbf{casting} hacía un valor se refiere a realizar una "conversión rápida" (que en realidad es una re-etiquetación) de un tipo de dato a otro, este tipo de conversiones se realizan con la siguiente instrucción:\begin{center}\textit{int a = (int) 3.14; //Se asigna el valor 3}\end{center}
+Como vemos, el valor asignado a la variable \textbf{int} es un decimal, un punto flotante, por lo cual no se le puede asignar dicho valor directamente, lo que hacemos es realizar un \textit{casting} de dicho valor a int, lo que terminara conteniendo la variable es el número 3, o sea, la parte entera del valor decimal. Este tipo de casting se pueden realizar entre más tipos de datos, no solamente de int a double.
+
+\subsection{Upcasting y Downcasting}
+El \textit{casting} también puede realizarse con clases, no como en tipos de datos regulares, pero similar; como hemos visto anteriormente, los objetos de clases se declaran de la siguiente forma:\begin{center}\textit{Persona p = new Persona();}\end{center}
+Los tipos de casting para las clases son:
+\begin{itemize}
+    \item \textbf{Upcasting}: se refiere a declarar una subclase como su superclase, es decir, el objeto declarado será tratado como su superclase, sigue siendo un objeto de una subclase, pero el compilador lo ve como su            superclase. Asumiendo que existe la superclase Animal y la subclase Perro, un ejemplo sería:\begin{center}\textit{Animal animal = new Perro(); //Upcasting}\end{center}
+            Esto es lo opuesto a declarar un objeto de una subclase en base a su superclase (\textit{Perro p = new Animal();}). El proceso de \textit{upcasting} es automático en Java, no se requiere algo más para esto.
+    \item \textbf{Downcasting}: es el proceso contrario a un upcasting, como vimos en el concepto anterior, el upcasting busca que el compilador vea a un objeto de una subclase como uno de una superclase, un objeto Gato será         visto como un objeto Animal, entonces, el \textit{downcasting} se refiere a hacer que el compilador vuelva a ver al objeto de la subclase como tal (que el objeto Gato sea visto como objeto Gato, no Animal). Este         proceso es manual, no automático, por lo que, se deben utilizar las siguientes instrucciones:\begin{center}\textit{Animal animal = new Perro(); //Upcasting\\((Perro)animal).Sonido(); //Re-etiqueta al                     objeto animal como perro}\end{center}
+\end{itemize}
+
+
+
+\section{Clases anónimas}
+Es un complemento de la sobre \textbf{sobre escritura de métodos}, las \textbf{clases anónimas} es un término utilizado para modificar un método de una clase a la hora de la declaración de un objeto de la misma, como podemos ver en el siguiente ejemplo:
+\begin{lstlisting}
+    class Machine { //Declara una clase
+        public void start() { //Declara un método que despliega un mensaje
+            System.out.println("Starting...");
+        }
+    }
+    
+    public static void main(String[]args){
+        Machinem = new Machine(){ //Declara un objeto Machine y abre llaves...
+            @Override public void start(){ //Con la palabra reservada "@Override" y la sentencia del método a modificar, se realizan los cambios de código
+                System.out.println("Woooo0"); //Despliega nuevo mensaje
+            }
+        };
+        m.start(); //Llamada al procedimiento modificado, despliega "Woooo0" en vez de "Starting..."
+    }
+\end{lstlisting}
+Podemos ver que es una forma rápida y fácil de comprender para realizar sobre escritura de métodos de clases: las clases anónimas no es una clase como tal, es una herramienta para sobre escribir métodos de clases.\\
+Esta modificación solo es aplicable para el objeto creado en ese momento, no para toda la clase en sí, así que, si creamos otro objeto Machine, el método start desplegará "Starting..." en vez del otro mensaje.
+
+
+
+\section{Clases anidadas}
+Java permite la \textbf{anidación} de clases, es decir, que una clase se convierta en un miembro de otra clase, simplemente escribe la declaración del objeto de la clase donde se requiera y listo (por ejemplo, en el constructor). Debe tomar en cuenta que, si la clase anidada es privada, ningún otro objeto o instrucción puede acceder a la clase anidada, pero la clase anidada puede acceder a todo el contenido (métodos y atributos) de su clase exterior. A continuación, dos ejemplos:
+\begin{lstlisting}
+    //Ejemplo 1
+    public class Maquina{ //Declara clase
+        private String Tipo; //Declara atributo privado
+        Maquina(String tipo){ //Declara constructor que le asigna valor al atributo
+            this.Tipo = tipo;
+            
+            Robot r = new Robot(); //Declara objeto Robot dentro de la clase Maquina
+            r.Despliegue(); //Llamada al método de despliegue
+        }
+    }
+    
+    private class Robot{ //Declara clase
+        public void Despliegue(){ //Declara método que despliega mensaje
+            System.out.println("Soy un robot");
+        }
+    }
+    
+    //Ejemplo 2
+    public class Maquina{ //Declara clase
+        private String Tipo; //Declara atributo privado
+        
+        public class Robot{ //Declara clase dentro de clase
+            public void Despliegue(){ //Declara método que despliega mensaje
+                System.out.println("Soy un robot");
+            }
+        }
+    }
+\end{lstlisting}

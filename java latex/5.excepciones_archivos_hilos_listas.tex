@@ -1,0 +1,346 @@
+\section{Excepciones}
+Una \textbf{excepción} es un error que ocurre durante la ejecución de un programa, puede que no haya ningún error de lógica o de sintaxis en el código, pero a la hora de estar ejecutándose, quizás se ingresó una cadena de texto en lugar de un número en el programa, o se sobrepasó la cantidad de elementos de un arreglo. Para poder \textbf{atrapar} errores durante la ejecución de un programa, se requiere la siguiente estructura:
+\begin{lstlisting}
+    try{
+        //Bloque de código donde se busca atrapar errores
+    } catch (Exception <Nombre de error>){
+        //Instrucciones en caso de detección de error
+    }
+\end{lstlisting}
+Dentro del bloque \textbf{try}, escribimos un bloque de código donde imaginamos que llegue a ocurrir un error (inserción de valores en arreglos, asignación de valores a variables, creación de objetos, apertura, lectura y escritura de archivos), y en el bloque \textbf{catch} escribimos lo que queremos que pase en caso de detección de un error, vemos que hay paréntesis donde está la palabra reservada \textbf{Exception}, esta palabra reservada corresponde a la superclase de excepciones que contiene Java, a partir de esta, existen subclases que se enfocan a atrapar distintos errores, como lo que se han mencionado recientemente, el <Nombre del error> simplemente es asignar un nombre sencillo a la excepción para utilizarla en el bloque \textit{catch} (es como crear una variable: int variable == Exception e). Presentamos un ejemplo donde se intenta acceder al índice de un elemento de un arreglo que no existe:
+\begin{lstlisting}
+    public class MyClass{
+        public static void main(String[]args){
+            try{ //Declara inicio de bloque try
+                int a[] = new int[2]; //Declara arreglo de dos posiciónes
+                System.out.println(a[5]); //Imprime el contenido del elemento 5, se presenta un error
+            } catch(Exception e) { //Declara inicio de bloque catch, atrapará cualquier error que se presente durante la ejecución
+                System.out.println("An error occurred"); //Despliega que ha ocurrido un error
+            }
+        }
+    }
+\end{lstlisting}
+\subsection{Manejo de múltiples excepciones}
+La palabra reservada \textbf{throw} sirve para \textbf{lanzar} o llamar a una de las tantas excepciones que maneja Java, es una alternativa a crear el bloque \textit{try-catch}, la estructura de \textit{throw} es:\begin{center}\textit{throw new $<$Excepción$>$($<$Argumento$>$)}\end{center}
+Para poder utilizar esta palabra reservada, debemos hacer que el código que se va a analizar \textbf{esté sujeto} a la excepción que queremos utilizar, por ejemplo, si queremos realizar una división, sabemos que no se puede dividir entre 0, por lo que tenemos el siguiente código:
+\begin{lstlisting}
+    public double division(double a, double b)throws ArithmeticException{ //Declara función que está sujeta a atrapar excepciones tipo aritméticas
+        if (b == 0){
+            throw new ArithmeticException("División entre 0") //Atrapa y llama a la excepción con un mensaje a desplegar
+        }else{
+            return a / b; //Regresa la divición éxitosa
+        }
+    }
+\end{lstlisting}
+
+\subsection{Excepciones lanzadas (throw)}
+Así que, para utilizar throw, debemos primero hacer que el bloque de código a evaluar esté sujeto a \textit{throws} y la excepción a buscar. Podemos hacer que un bloque de código esté sujeto a más de una excepción, estas excepciones se separan por medio de comas (,).\\
+Ahora bien, también podemos hacer que haya más de un bloque catch en una estructura try, cada bloque catch puede atrapar distintas excepciones, es recomendable organizar las excepciones de los catch desde los más específicos hasta los más generales. Un ejemplo sobre múltiples bloques catch:
+\begin{lstlisting}
+    public double division(double a, double b){ //Declara una función
+        try{
+            int num1 = 1;
+            int num2 = 2; //Declara y asigna valores a las variables
+            System.out.println(num1 / num2); //Imprime la división de las variables
+        } catch(ArithmeticException e){ //Atrapa la excepción en caso de división entre cero
+            System.out.println("División entre 0");
+        } catch(InputMismatchException e){ //Atrapa la excepción en caso de tipo de dato ingresado distinto a la variable
+            System.out.println("Error de formato")
+        }
+    }
+\end{lstlisting}
+
+\subsection{Excepciones Unchecked y Checked}
+Hay dos tipos de excepciones:
+\begin{enumerate}
+    \item \textbf{Checked}: son aquellas que son atrapadas durante la compilación, y te generan un mensaje de error que evita que el programa sea ejecutado. Por ejemplo, la excepción InterruptedException (interrupción por el método sleep de los hilos).
+    \item \textbf{Unchecked (o Runtime)}: son aquellas excepciones atrapadas durante el tiempo de ejecución de un programa. Por ejemplo, la excepción ArithmeticException (errores aritméticos).
+\end{enumerate}
+
+
+
+\section{Listas}
+La API de Java tiene clases especiales para guardar y manipular grupos de objetos.
+
+\subsection{ArrayList}
+El \textbf{ArrayList} es un tipo de arreglo especial, primero debemos usar la siguiente instrucción para utilizarlo:\begin{center}\textit{import java.util.ArrayList;}\end{center}
+Este tipo de arreglo se diferencia de los otros debido a que, una vez declarado con un tamaño inicial, cuando este tamaño se supera, el arreglo se incrementa, haciendo que incremente su tamaño solo. Este es uno de los escenarios de declaración de \textit{ArrayList}, pero también se pueden declarar sin un tamaño, por lo que es considerado como un arreglo de tamaño indeterminado, además, tampoco es necesario declarar el tipo del ArrayList, como se ve a continuación:\begin{center}\textit{ArrayList colores = new ArrayList(); //ArrayList sin tamaño fijo ni tipo específico\\ArrayList<String> colores = new ArrayList<String>(10); //ArrayList con tipo y tamaño declarado}\end{center}
+Lo que almacena un ArrayList son objetos, por lo tanto, no podemos declarar un arreglo de estos que almacene valores int, double o char, sin embargo, podemos hacer que almacene clases tipo que representen estos valores, es decir, que el arreglo almacene objetos Interger, Double, entre otros.\\
+Otro factor que diferencia a estos arreglos de los normales, son la forma de trabajarlos, para agregar un elemento a un ArrayList se requiere del método \textbf{add()} y para eliminar, se utiliza el método \textbf{remove()}, como se ve en el siguiente código:
+\begin{lstlisting}
+    import java.util.ArrayList; //Importa la librería necesaria para utilizar ArrayLists
+    
+    public class MyClass{
+        public static void main(String[]args){
+            ArrayList<String> colores = new ArrayList<String>(); //Declara el ArrayList de clase tipo String
+            colors.add("Red");
+            colors.add("Blue");
+            colors.add("Green");
+            colors.add("Orange"); //Agrega 4 colores con el método add()
+            colors.remove("Green"); //Elimina un color con el método remove()
+            System.out.println(colors); //Imprime los colores
+        }
+    }
+\end{lstlisting}
+Otros métodos utiles son:
+\begin{itemize}
+    \item \textbf{contains()}: regresa \textbf{true} si el arreglo contiene un objeto especificado.
+    \item \textbf{get(índice int)}: regresa el contenido del elemento en la posición especificada. 
+    \item \textbf{size()}: regresa el número de elementos del arreglo.
+    \item \textbf{clear()}: elimina todos los elementos del arreglo.
+\end{itemize}
+
+\subsection{LinkedLists}
+Las \textbf{LinkedLists} tienen una sintaxis muy similar a las \textit{ArrayLists}, puedes transformar el código de este último tipo de arreglo a un LinkedList cambiando las siguientes instrucciones:\begin{center}\textit{import java.util.LinkedList; //Librería para trabajar con LinkedLists\\LinkedList ll = new LinkedList(); //Declaración de una LinkedList}\end{center}
+La diferencia entre un ArrayList y un LinkedList es que, el primero trabaja de forma similar a un arreglo, los ArrayLists almacenan objetos de la forma en la que un arreglo lo hace, en cambio la LinkedList, almacena objetos y crea un enlace o \textit{link} hacia el próximo elemento, es decir, forma una cadena o secuencia con los elementos, además, también almacena la dirección de memoria de los objetos guardados. Las LinkedLists son utilizadas para guardar, insertar y eliminar gran cantidad de elementos, y los ArrayList son utilizados para guardar menor cantidad de elementos, pero con la posibilidad de acceder a ellos de forma más rápida y sencilla. Un ejemplo de LinkedListsL
+\begin{lstlisting}
+    import java.util.LinkedList; //Declara librería para trabajar con LinkedLists
+    import java.util.Scanner;
+
+    public class Main {
+        public static void main(String[ ] args) {
+	        Scanner scanner = new Scanner(System.in);
+            LinkedList<String> words = new LinkedList<String>(); //Declara LinkedList tipo String
+        
+            while(words.size()<5){
+                String word = scanner.nextLine(); //Asigna valor a la variable
+                words.add(word); //Agrega la variable al LinkedList
+            }
+        
+            for(String i: words){ //Recorre el LinkedList
+                if(i.length() > 4){
+                    System.out.println(i); //Si el largo del elemento del LinkedList supera los cuatro carácteres, imprime el elemento
+                }
+            }
+        }
+    }
+\end{lstlisting}
+
+\subsection{HashMap}
+Un \textbf{HashMap} es un tipo de almacenamiento de datos donde se utiliza un \textbf{par de elementos}, los cuales son una \textbf{llave} (como un índice) y un \textbf{valor} (el contenido) para guardar y acceder a la información almacenada. De igual forma, se requiere incluir una librería para utilizarlas y la forma para declararlos es similar a las dos listas vistas anteriormente:\begin{center}\textit{import java.util.HashMap; //Libreria para trabajar con HashMaps\\HashMap$<$Tipo elemento, Tipo índice$>$ $<$Nombre$>$ = new HashMap$<$Tipo elemento, Tipo índice$>$(); //Declaración de un HashMap}\end{center}
+Los métodos para agregar, eliminar y obtener el valor de un elemento en un HashMap, respectivamente, son \textbf{put()}, \textbf{remove()} y \textbf{get(Llave)}. Un ejemplo de un HashMap es:
+\begin{lstlisting}
+    import java.util.HashMap; //Declara librería para trabajar con HashMaps
+    
+    class A {
+        public static void main(String[ ] args) {
+            HashMap<String, String> m = new HashMap<String, String>(); //Declara HashMap con llave tipo String y valores tipo String
+            m.put("A", "First");
+            m.put("B", "Second");
+            m.put("C", "Third"); //Agrega elementos
+            System.out.println(m.get("B")); //Despliega el valor de la llave "B"
+        }
+    }
+\end{lstlisting}
+Un \textit{HashMap} no puede tener llaves duplicadas, si escribes un valor y llave sobre una llave ya existe, el valor se sobre escribe. Existen los métodos \textbf{containsKey()} y \textbf{containsValue()} para saber si en un HashMap existe alguna llave o valor, en caso de que alguno de los dos no exista, se regresa un valor \textbf{null}.
+
+\subsection{Conjuntos}
+Un \textbf{conjunto} es una colección de elementos que no puede tener elementos duplicados. Un \textit{HashSet} es la herramienta utilizada para trabajar con conjuntos, como vemos en el siguiente ejemplo:
+\begin{lstlisting}
+    import java.util.HashSet; //Declara librería para trabajar con HashMaps
+    
+    class A {
+        public static void main(String[ ] args) {
+            HashSet<String> set = new HashSet<String>(); Declara HashMap solamente con llave, sin valor
+            set.add("A");
+            set.add("B");	
+            set.add("C"); //Agrega elementos que conforman un conjunto
+            System.out.println(set.size()); //Imprime el tamaño del HashMap
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{LinkedHashMaps}
+Los HashMaps no llevan un registro u orden sobre como se van agregando los elementos, puedes agregar 100 elementos y no te dice cuál fue primero o cuál es el último. Para resolver eso, se emplea un \textbf{LinkedHashMap} para que haya enlaces entre los elementos, logrando así saber el orden en el que se fueron registrando.
+
+\subsection{Organizando listas}
+Una forma sencilla de \textbf{organizar} listas, es por medio de la clase \textbf{Collections}, dentro de la librería \textbf{java.util}, es estática, por lo que no debes importarla, ni crear un objeto de la misma. El método \textbf{sort()} de esta clase es la que utilizaremos para lograr nuestro cometido:
+\begin{lstlisting}
+    import java.util.ArrayList; //Importa librería para trabajar con ArrayLists
+    import java.util.Collections; //Importa librería para trabajar con el método sort()
+    
+    public class App{
+        public static void main(String[] args){
+            ArrayList<Interger> numeros = new ArrayList<Interger>(); //Declara ArrayList de tipo Interger
+            ArrayList<String> animales = new ArrayList<String();
+            nums.add(3);
+            nums.add(100);
+            nums.add(56);
+            nums.add(4342);
+            nums.add(90);
+            nums.add(353);
+            nums.add(66);
+            nums.add(34);
+            nums.add(4);
+            nums.add(1); //Agrega muchos elementos
+            animales.add("perro");
+            animales.add("serpiente");
+            animales.add("leon");
+            animales.add("gato"); //Agrega muchos elementos
+            
+            Collections.sort(nums); //Organiza los elementos de menor a mayor
+            Collections.sort(animales); //Organiza elementos en orden alfabético
+            System.out.println(nums);
+            System.out.println(animales);
+        }
+    }
+\end{lstlisting}
+Otros métodos útiles de la clase Collections son:
+\begin{itemize}
+    \item \textbf{max()}; regresa el elemento máximo de una colección de datos.
+    \item \textbf{min()}; regresa el elemento mínimo de una colección de datos.
+    \item \textbf{reverse()}; regresa la secuencia invertida de una lista.
+    \item \textbf{suffle()}; barajea los elementos de una lista en base aun parámetro (p. e. aleatorio).
+\end{itemize}
+
+\subsection{Iterators}
+Los \textbf{Iterators} son un objeto que nos permiten navegar a traves de una colección de datos, para obtener y eliminar elementos de los mismos. Cada colección de datos posee un método \textbf{iterator()}, a partir de este, podemos crear objetos iterators, si no creamos el objeto, no podemos utilizar un iterator; otra cosa a considerar es que debemos importar la librería \textbf{java.util.Iterators;} para poder trabajarlos.\\
+Algunos de los métodos disponibles de los iterators son:
+\begin{itemize}
+    \item \textbf{hasNext()}: regresa \textit{true} en caso de que haya un elemento a continuación del actual, en caso de que no, regresa \textit{false}.
+    \item \textbf{next()}: regresa el elemento actual y avanza al siguiente.
+    \item \textbf{remove()}: remueve el último elemento regresado en next().
+\end{itemize}
+Se pueden combinar iterators y ciclos, como vemos en el siguiente código:
+\begin{lstlisting}
+    import java.util.Iterator; //Librería para trabajar con Iterators
+    import java.util.LinkedList; //Librería para trabajar con LinkedLists
+
+    public class MyClass {
+        public static void main(String[ ] args) {
+            LinkedList<String> animals = new LinkedList<String>(); //Declara LinkedList del tipo String
+            animals.add("fox");
+            animals.add("cat");
+            animals.add("dog");
+            animals.add("rabbit"); //Agrega elementos
+        
+            Iterator<String> it = animals.iterator(); //Declara objeto Iterator de la colección animals
+            while(it.hasNext()) { //Mientras detecte que existe un elemento siguiente al actual...
+                String value = it.next(); //A value se le asigna el elemento actual del iterator y se mueve al siguiente
+                System.out.println(value); //Imprime la variable
+            }
+        }
+    }
+\end{lstlisting}
+
+
+
+\section{Hilos}
+Java maneja \textbf{múltiples hilos} para trabajar, podemos correr algún bloque de código en un hilo mientras se ejecutan otros bloques de código en más hilos. Existen dos formas de crear un hilo:
+\begin{enumerate}
+    \item \textbf{Declarando una subclase de Thread}: creamos una subclase de la superclase \textbf{Thread} para obtener todos sus métodos, pero sobre todo, sobre escribir el método \textbf{run()} para ahí              escribir el código que buscamos ejecutar, como vemos en el siguiente ejemplo:
+    \begin{lstlisting}
+        class Prueba extends Thread{ //Subclase de Thread
+            public void run(){ //Sobre escribe el método run con otro comportamiento
+                System.out.println("Hola mundo");
+            }
+        }
+        
+        class App{
+            public static void main(String[] args){
+                Prueba p = new Prueba(); //Declara un objeto Prueba
+                p.start(); //Llamada al procedimiento que ejecuta el método run()
+            }
+        }
+    \end{lstlisting}
+    \item \textbf{Declarando una clase con interface Runnable}: declaramos una clase que implemente la interface \textbf{Runnable} y sobre escribimos el método \textit{run()} para que haga lo que nosotros                buscamos. En el método main, declaramos un objeto Thread, y como argumento en \textbf{new}, le pasamos un objeto de nuestra clase creada previamente, una vez declarado el objeto \textit{Thread},            llamamos a su método start(), como se ve en el siguiente ejemplo:
+    \begin{lstlisting}
+        class Prueba implements Runnable{ //Clase que implementa la interface Runnable para hilos
+            public void run(){ //Sobre escribe el método run con otro comportamiento
+                System.out.println("Hola mundo");
+            }
+        }
+        
+        class App{
+            public static void main(String[] args){
+                Thread p = new Thread(new Prueba()); //Declara un objeto Thread con un objeto Prueba
+                p.start(); //Llamada al procedimiento que ejecuta el método run()
+            }
+        }
+    \end{lstlisting}
+\end{enumerate}
+Cosas a considerar con los hilos:
+\begin{itemize}
+    \item Todos los hilos creados por uno tienen un nivel de \textbf{prioridad}, este nivel de prioridad es 5, pero puede ir de 1 a 10. Para cambiar el nivel de prioridad de un hilo, se utiliza el método Thread.setPriority() (p. e. Thread.setPriority(3): prioridad tres).
+    \item Se puede \textbf{pausar} un hilo utilizando el método Thread.sleep(), dentro de los paréntesis, se escribe la cantidad de milisegundos que el hilo se detendrá (p. e. Thread.sleep(2000): dos segundos). Pausar un hilo puede causar un error durante la ejecución, por lo que es recomendable trabajar con dicho método dentro de un bloque try-catch.
+\end{itemize}
+
+
+
+\section{Trabajando con archivos}
+El paquete \textbf{java.io} contiene una clase llamada \textbf{File} que nos permite trabajar con archivos, una vez importada, declaramos un objeto de dicha clase y, en los paréntesis de File al final de la declaración, escribimos la ruta del archivo que buscamos trabajar, como se ve a continuación:
+\begin{center}\textit{import java.io.File; //Paquete necesario para trabajar con archivos\\File $<$Nombre$>$ = new File ($<$Ruta del archivo$>$); //Declaración objeto File}\end{center}
+El siguiente código nos ayuda a verificar la existencia del archivo que trabajaremos:
+\begin{lstlisting}
+    import java.io.File; //Paquete necesario para trabajar con archivos
+
+    public class MyClass {
+        public static void main(String[ ] args) {
+            File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+            if(archivo.exists()) { //Si la ruta del objeto File creado existe
+                System.out.println(archivo.getName() +  "exists!"); //Despliega mensaje
+            }
+            else { 
+                System.out.println("The file does not exist");
+            }
+        }
+    }
+\end{lstlisting}
+\textbf{Nota}: se utilizan doble barra invertida (\textbackslash\textbackslash) para escribir las rutas de un archivo, porque la diagonal invertida suele ser usada como \textbf{secuencia de escape}, además, es recomendable trabajar archivos alrededor de un bloque try-catch.
+
+\subsection{Lectura}
+La clase \textbf{Scanner} del paquete \textbf{java.util} nos va a ser util para leer el contenido de un archivo en Java, el constructor de esa clase permite que le pasemos un objeto File en su constructor y declaración, como se ve a continuación:
+\begin{lstlisting}
+    try{
+        File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+        Scanner arlectura = new Scanner(archivo); //Declara objeto Scanner para abrir un archivo
+    } catch(FileNotFoundException e){}
+\end{lstlisting}
+La clase \textit{Scanner} es heredada de \textit{Iterator}, por lo que esta primera se comporta como la última, podemos utilizar los métodos mencionados en el punto de Iterators para esta ocasión, el método \textit{next()}, para Scanner, regresa el contenido del archivo palabra a palabra, por lo que el método regresará una línea del archivo hasta que encuentre un salto, por lo tanto, obtendremos línea a línea hasta que se acabe el fichero. Expandiremos el ejemplo anterior:
+\begin{lstlisting}
+    try{
+        File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+        Scanner arlectura = new Scanner(archivo); //Declara objeto Scanner para abrir un archivo
+        
+        while(arlectura.hasNext()){ //Mientras encuentre más palabras...
+            System.out.println(arlectura.next()); //Imprime una línea del archivo
+        }
+        arlectura.close(); //Cierra el objeto Scanner
+    } catch(FileNotFoundException e){ //Excepción por si no encuentra el archivo
+    
+        System.out.println("No encontrado");
+    }
+\end{lstlisting}
+
+\subsection{Creación y escritura}
+Utilizamos la clase \textbf{Formatter} del paquete \textbf{java.util} para crear y escribir archivos en una ruta especificada, en caso de que el archivo ya exista, el archivo se sobre escribirá. Un ejemplo:
+\begin{lstlisting}
+    import java.util.Formatter; //Paquete necesario para trabajar con Formatter
+
+    public class MyClass {
+        public static void main(String[ ] args) {
+            try {
+                Formatter f = new Formatter("D:\\Escritorio\\test.txt"); //Declara objeto Formatter con la ruta donde se creará el archivo
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
+        }
+    }
+\end{lstlisting}
+Una vez declarado el objeto, podemos escribir en él con el método \textbf{format()}, el cual tiene una forma peculiar de trabajar: en él, escribimos un parámetros entre comillas con, por ejemplo, tres pares de caracteres \textbf{\%s}, estos tres pares de caracteres en un solo parámetro representan tres palabras, separadas por espacios, después de este parámetro, le pasamos tres parámetros más, los cuales son las palabras en sí que va a contener el archivo, es decir, por cada par \textit{\%s}, va otro parámetro que es la palabra que queremos escribir. El carácter \%s significa que lo que escribiremos es una cadena de texto. Podemos ver esto más claro con el siguiente ejemplo:
+\begin{lstlisting}
+    import java.util.Formatter; //Paquete necesario para trabajar con Formatter
+
+    public class MyClass {
+        public static void main(String[ ] args) {
+            try {
+                Formatter f = new Formatter("D:\\Escritorio\\test.txt"); //Declara objeto Formatter con la ruta donde se creará el archivo
+                f.format("%s %s", "esta es la primer cadena a escribir", "esta es la segunda cadena, ambas están separadas por un espacio\n"); //Escribe en el archivo
+                f.format("%s %s", "soy el segundo parámetro de format", "soy el tercer parámetro de format\n"); //Escribe en el archivo
+                f.clse(); //Cierra el objeto
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
+        }
+    }
+\end{lstlisting}
