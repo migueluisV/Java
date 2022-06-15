@@ -2,54 +2,60 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class CaliAl {
-    //public float[] Calificaciones = new float[5];
-    //public String[] Nombres = new String[5];
     public byte CalVali = 0, CalInvali = 0, CaliApro = 0, CaliRepro = 0;
     public float Prom, AcumCali = 0, CaliMax = 0, CaliMen;
-    int i;
     Scanner lectura = new Scanner(System.in);
 
     public void IngresoDatos(float[] cal, String[] nom, int cont){
-        for(i = cont; i < 5; i++){
+        int i;
+        if (cont == 5){
+            Prom = AcumCali / 5;
+            for (i = 0; i < 5; i++){
+                if (cal[i] > CaliMax){
+                    CaliMax = cal[i];
+                }
+            }
+    
+            CaliMen = CaliMax;
+            for (i = 0; i < 5; i++){
+                if (cal[i] < CaliMen){
+                    CaliMen = cal[i];
+                }
+            }
+
+            lectura.close();
+            Despliegue(cal, nom);
+        } else{
             try{
-                System.out.printf("%s. Ingresa una calificación: ", (i + 1)); cal[i] = lectura.nextFloat();
-                System.out.printf("%s. Ingresa un nombre: ", (i + 1)); nom[i] = lectura.next();
+                System.out.printf("%s. Ingresa una calificación: ", (cont + 1)); cal[cont] = lectura.nextFloat();
+                lectura.nextLine();
+                System.out.printf("%s. Ingresa un nombre: ", (cont + 1)); nom[cont] = lectura.nextLine();
+
+                AcumCali += cal[cont];
+                if (cal[cont] > 0.0 && cal[cont] <= 10.0){
+                    CalVali++;
+                    if (cal[cont] > 6.0 && cal[cont] <= 10.0){
+                        CaliApro++;
+                    } else if (cal[cont] <= 6.0 && cal[cont] > 0.0){
+                        CaliRepro++;
+                    }  
+                } else{
+                    CalInvali++;
+                }
+
+                cont++;
+                IngresoDatos(cal, nom, cont);
             } catch(InputMismatchException e){
                 System.out.println("Error de formato.");
                 lectura.nextLine();
-                IngresoDatos(cal, nom, i);
-            }
-            AcumCali += cal[i];
-            if (cal[i] > 0.0 && cal[i] <= 10.0){
-                CalVali++;
-                if (cal[i] > 6.0 && cal[i] <= 10.0){
-                    CaliApro++;
-                } else if (cal[i] <= 6.0 && cal[i] > 0.0){
-                    CaliRepro++;
-                }
-            } else{
-                CalInvali++;
+                IngresoDatos(cal, nom, cont);
             }
         }
-        Prom = AcumCali / 5;
-        for (i = 0; i < 5; i++){
-            if (cal[i] > CaliMax){
-                CaliMax = cal[i];
-            }
-        }
-        CaliMen = CaliMax;
-        for (i = 0; i < 5; i++){
-            if (cal[i] < CaliMen){
-                CaliMen = cal[i];
-            }
-        }
-
-        Despliegue(cal, nom);
     }
 
     public void Despliegue(float[] cal, String[] nom){
-
-        System.out.println("Los alumnos ingresados son:\n");
+        int i;
+        System.out.println("\nLos alumnos ingresados son:\n");
         for(i = 0; i < 5; i++){
             System.out.printf("%s - %s, con calificación de %s.\n", (i + 1), nom[i], cal[i]);
         }
