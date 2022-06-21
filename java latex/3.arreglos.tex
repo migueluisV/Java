@@ -43,3 +43,20 @@ Entonces, para declarar un arreglo multidimensional debemos seguir la siguiente 
 Vemos que el ejemplo anterior hay dos pares de corchetes cuadrados, lo cual significa que el arreglo es de dimensión dos, si hubiera tres pares, sería de dimensión tres. Para poder \textbf{inicializarlo} seguimos el siguiente ejemplo:\begin{center}\textit{int[][] nums = \{\{1, 3, 5\}, \{2, 4, 6\}, \{7, 8, 9\}\}}\end{center}
 Para un arreglo de dimensión dos, el primer par de corchetes representa el número de columnas que tendrá, y el segundo par de corchetes son la cantidad de filas, por ende, en la inicialización previa, vemos que el arreglo bidimensional es de 3x3, porque hay tres pares de llaves (filas) con tres elementos en cada uno (columnas).
 Para acceder a los elementos del arreglo también se utilizan índices base 0, y seguimos la lógica de los pares de corchetes cuadrados explicado anteriormente:\begin{center}\textit{System.out.println(nums[0, 0];)}\end{center}
+
+\subsection{Arreglos como parámetros}
+Si podemos pasar variables de cualquier tipo como argumento a un procedimiento, función o método, podemos realizar esto mismo pero con arreglos, solamente debemos ser consientes que el arreglo a pasar debe ser del mismo tipo que el parámetro y dimensión, sin embargo, en el parámetro, no se especifica la cantidad de elementos del mismo, cuando se le pasa un arreglo a un procedimiento, función o método, estos reciben la cantidad de elementos, el tipo y los elementos como tal, como vemos en el siguiente código:
+\begin{lstlisting}
+	static void CalculoSumas(double[] Valores){
+		//Código	
+	}
+	
+	static void DespliegueValores(){
+		double[] Valores = {1, 2, 3, 4}; //Declara e inicializa un arreglo		
+		
+		//Código
+	
+		CalculoSumas(Valores); //Se le pasa como argumento un arreglo al procedimiento
+	}
+\end{lstlisting}
+Vemos que al llamar a \textit{CalcularSuma}, se le pasa únicamente el nombre del arreglo, sin corchetes cuadrados ni la cantidad de los elementos que posee.

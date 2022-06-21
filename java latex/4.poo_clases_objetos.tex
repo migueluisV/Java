@@ -1,10 +1,11 @@
 \section{POO}
 Java trabaja con la programación orientada a objetos, es decir, clases, objetos, métodos y atributos.
+
 \subsection{Clases y objetos}
 Una clase es una plantilla que representa un objeto, situación o estado de la vida real, una clase es una representación de un objeto de la realidad. Una clase está constituida por sus \textbf{atributos} (características), \textbf{comportamiento} (métodos, que son lo mismo que funciones y procedimientos), \textbf{acceso a las clases} (modificadores de acceso), \textbf{objetos} (objeto naciente o generado a partir de la clase, con el cual se va a trabajar), \textbf{constructores y destructores} (estado cuando se crea un objeto y cuando se elimina), entre otra consideraciones que veremos más adelante.
 
 \subsubsection{Creando una clase en VSCode}
-Dependiendo del editor de texto o IDE donde se esté trabajando, hay distintos pasos para crear una clase de manera visual o por medio de formularios, sin embargo, la forma para hacer en VSCode es ubicándonos en el árbol de trabajo del proyecto en el Explorador lateral, vemos que una de las carpetas del proyecto en Java es \textit{src}, damos clic derecho sobre esa carpeta, y damos clic a la opción de \textit{New File}, le damos el nombre que queramos al archivo, pero tiene que tener una terminación \textbf{.java}; una vez hecho esto, tenemos una clase creada.
+Dependiendo del editor de texto o IDE donde se esté trabajando, hay distintos pasos para crear una clase de manera visual o por medio de formularios, sin embargo, la forma para hacer en VSCode es ubicándonos en el árbol de trabajo del proyecto en el Explorador lateral, vemos que una de las carpetas del proyecto en Java es \textit{src}, damos clic derecho sobre esa carpeta, y damos clic a la opción de \textit{New File}, le damos el nombre que queramos al archivo, pero tiene que tener una terminación \textbf{.java}; una vez hecho esto, tenemos una clase creada. No es necesario importarla al archivo \textit{App.java}, ya está adjuntada y podemos trabajarla sin ningún inconveniente.
 
 \subsubsection{Creando una clase por código}
 Si no se está trabajando en VSCode, en el mismo archivo App de código fuente de nuestro código, escribimos lo siguiente:\begin{center}\textit{$<$Modificador acceso$>$ class $<$Nombre clase$>$ \{ //Instrucciones \}}\\public class Persona\{ //Instrucciones \}\end{center}
@@ -70,6 +71,47 @@ Solo recordemos que los tips anteriores son recomendaciones para nombrar variabl
             Suma(a, b); //Llamada al método de suma de valores
         }
     }
+\end{lstlisting}
+\textbf{Sobre escritura de métodos}\\
+Sobre cargar un método es hacer que este tenga un comportamiento distinto entre clases derivadas, manteniendo el mismo tipo, nombre y atributos. Por ejemplo, el método \textit{Despliegue()} en la clase padre \textit{Persona} despliega el nombre de la persona nada más, por otro lado, el mismo método en la claes derivada \textit{Anciando despliega el nombre y la edad}, como vemos en el siguiente código:
+\begin{lstlisting}
+    public class Persona{ //Declara una clase Persona con un atributo y constructor
+        private String Nombre;
+        
+        public Persona(String nombre){
+        		Nombre = nombre;
+        }
+        
+        public void Despliegue(){ //Método a sobre escribir
+        		System.out.print("Mi nombre es: " + Nombre);
+        }
+    }
+    
+    class Anciano extends Persona{ //Declara una clase Anciano que hereda de Persona su contenido
+    		private byte Edad;
+    		
+    		public Anciano(String nombre, byte edad){ //Declara dos parámetros, uno corresponde al atributo de la clase, y el otro al parámetro de la clase base
+    			super(nombre); //Se usa la palabra super para pasarle el parámetro de la clase derivada a su clase base
+    			Edad = edad;
+    		}
+    		
+    		public void Despliegue(){ //Método ya sobre escrito, vemos que tiene un comportamiento distinto al original
+        		System.out.println("Mi nombre es: " + super.Nombre);
+        		System.out.print("Mi edad es: " + Edad);
+        }
+    }
+\end{lstlisting}
+Concluimos que solamente basta con mantener el mismo nombre, la misma cantidad de parámetros y el mismo tipo de retorno (tipo de dato o void), además de que no requiere ninguna palabra reservada adicional.\\
+\textbf{Sobrecarga de métodos}\\
+La sobrecarga de métodos hace referencia a nombrar distintos métodos con el mismo nombre, pero variando el tipo de dato de retorno y/o su cantidad de parámetros (variando el tipo de dato de parámetro tambien), es una herramienta adicional a la sobre escritura, como lo vemos en el siguiente ejemplo:
+\begin{lstlisting}
+	int calculaSuma(int x, int y, int z){
+    		//Código
+	}
+
+	int calculaSuma(double x, double y, double z){
+    		//Código
+	}
 \end{lstlisting}
 
 \subsubsection{Atributos de clases}
@@ -205,7 +247,7 @@ Entonces, si una función o procedimiento tiene como parámetro un tipo de dato,
 \end{lstlisting}
 \textit{Nota}: los strings y arreglos también son tratados como referencias en los parámetros.
 
-\subsubsection{Constructores}
+\subsubsection{Constructores y Destructores}
 Un \textbf{constructor} es un método que es llamado cuando se crea un objeto de una clase, los constructores están caracterizados porque no requieren modificador de acceso ni algún tipo de retorno (un tipo de dato o void), sin embargo, el constructor debe tener el mismo nombre de la clase donde se está declarando.\\
 Los constructores suelen ser usados para inicializar un objeto de una clase con ciertos valores de atributos, además, una clase puede tener más de un constructor. Para declarar un objeto y verlo en funcionamiento, podemos ver el siguiente ejemplo:
 \begin{lstlisting}
@@ -237,6 +279,23 @@ Los constructores suelen ser usados para inicializar un objeto de una clase con 
             Persona persona = new Persona (nom, ed); //Declaración de un objeto Persona y se le pasa como parámetro las variables nom y edad, para llamar al constructor
             persona.Despliegue(); //Llamada al método que despliega la información de la persona
         }
+    }
+\end{lstlisting}
+En JAVA, no existen los \textbf{destructores}, la máquina virtual de JAVA (JVM por sus siglas en inglés) cuenta con un recolector de basura automático que asigna y quita memoria de los objetos cuando se crea y finaliza su uso, es por ello que, cuando codificamos una clase, no existe algún método o forma de crear destructores.
+Por otra parte, cada objeto de una clase cuenta con un método llamado \textbf{finalize()}, el cual asegura que se eliminará o cerrará cualquier recurso o conexión que un objeto tenga, este método solo puee ser utilizado una vez, es recomendable utilizado en conexiones de bases de datos o cierre de flujos de archivos.
+Vemos un código muy sencillo que demuestra el funcionamiento de este método:
+\begin{lstlisting}
+    public class MyClass{
+        public static void main(String[]args){
+            MyClass miclase = new MyClass(); //Declara un objeto MyClass
+            miclase.finalize(); //Se llama al método finalize para limpiar conexiones y recursos
+            miclase = null; //Deja el objeto en null
+            System.out.print("método main()."); //Mensaje de limpieza
+        }
+        
+       	protected void finalize(){
+       		System.out.print("Destruido "); //Modifica el cuerpo del método finalize
+       	}
     }
 \end{lstlisting}
 
@@ -286,7 +345,7 @@ En el ejemplo anterior, no podemos modificar directamente el valor del atributo 
 \subsubsection{Herencia}
 La \textbf{herencia} es el proceso de pasar los atributos y métodos de una clase (llamada \textbf{clase padre, superclase o base}) a otra clase (llamada \textbf{clase derivada, subclase o hija}), estos atributos y métodos se pasan según el \textit{modificador de acceso} que tenga, en Java, si algún atributo o método de una superclase es \textit{private}, este atributo o método no se hereda a una subclase. en cambio, cualquier atributo \textit{public} o \textit{protected} si se heredan. Para heredar de una clase a otra, debemos utilizar la palabra reservada \textit{extend}, como en el siguiente ejemplo:
 \begin{lstlisting}
-    public class Persona{ //Declara una calse Persona con un atributo y método
+    public class Persona{ //Declara una clase Persona con un atributo y método
         private String Nombre;
         
         public void setNombre(String nom){
@@ -305,6 +364,26 @@ Para \textbf{declarar} un objeto de una subclase, utilizamos la instrucción del
 \begin{lstlisting}
     public static void main(String[] args){
         Persona viejo = new Anciano(); //Primero se escribe el nombre de la superclase, después de new, el nombre de la subclase
+    }
+\end{lstlisting}
+\textbf{Heredar un constructor}\\
+En caso de que una clase base posea un constructor con parámetros y bloque de código, al tener una clase derivada, obligatoriamente debemos tratar los parámetros del constructor de la clase base en el constructor de la clase derivada, esto requiere de la palabra reservada \textbf{super()}, super hace referencia a la clase padre de una clase derivada, dentro de los paréntesis, van los parámetros del constructor de la clase padre, como se ve en el siguiente código:
+\begin{lstlisting}
+    public class Persona{ //Declara una clase Persona con un atributo y constructor
+        private String Nombre;
+        
+        public Persona(String nombre){
+        		Nombre = nombre;
+        }
+    }
+    
+    class Anciano extends Persona{ //Declara una clase Anciano que hereda de Persona su contenido
+    		private byte Edad;
+    		
+    		public Anciano(String nombre, byte edad){ //Declara dos parámetros, uno corresponde al atributo de la clase, y el otro al parámetro de la clase base
+    			super(nombre); //Se usa la palabra super para pasarle el parámetro de la clase derivada a su clase base
+    			Edad = edad;
+    		}
     }
 \end{lstlisting}
 

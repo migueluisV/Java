@@ -143,6 +143,56 @@ Ejemplos:
 
 
 
+\section{Recursividad}
+La \textbf{recursividad} es una alternativa a los ciclos, el concepto va de llamar a un método, procedimiento o función dentro de él mismo para realizar una tarea repetitiva recursivamente, para lograr esto, debe contar con una \textbf{condición} que le permita salir de la recursividad o llamada a sí mismo, sino, sería como un bucle infinito, además, requiere de una variable \textbf{contador auxiliar} que administrará la navegación dentro del método.
+Estas dos características lo hacen ver parecido a un ciclo while, por lo general, la recursividad es utilizada para menús o situaciones muy específicas que los ciclos no pueden cumplir, a continuación, dejo un código que se encarga de calcular el factorial de un número y un procedimiento que despliega un menú de opciones:
+\begin{lstlisting}
+	import java.util.Scanner;
+
+	class App{
+		static Scanner lectura = new Scanner(System.in);	
+	
+		static int Factorial(int n){
+			if (n == 1) //Se llama a si mismo hasta que el parámetro n sea 1
+				return 1;
+			else
+				return Factorial(n - 1) * n; //Se llama a si mismo regresando el parámetro n -1 y se multiplica
+		}
+		
+		static void Menu(){
+			byte Op;
+			int num;
+			
+			System.out.println("Selecciona una opción del menú:\n");
+			System.out.println("1) Factorial.\n2) Suma 1 + 1.\n3) Imprime Hola mundo.");
+			System.out.printf("Opción: "); Op = lectura.nextByte();
+			lectura.nextLine(); //Limpieza del buffer de entrada de datos
+			
+			switch(Op){
+				case 1:
+					System.out.printf("Ingresa un número para calcular su factorial: "); num = lectura.nextInt();
+					System.out.println(Factorial(num));
+					break;
+				case 2:
+					System.println(1 + 1);
+					break;
+				case 3:
+					System.out.println("Hola mundo");
+					break;
+				default:
+					System.out.println("Opción invalida.");
+					Menu(); //Se llama a si mismo en caso de que se ingrese una opción distinta a las del menú
+			}
+		}
+	
+		public static void main(String[] args) throws Exception {
+			Menu();
+		}
+	}
+\end{lstlisting}
+
+
+
 \section{Condicional switch}
 La condicional \textbf{switch} evalúa una variable en base a un conjunto de valores y se le asigna un comportamiento o tarea a hacer, los componentes de un \textit{switch} son:
 \begin{itemize}

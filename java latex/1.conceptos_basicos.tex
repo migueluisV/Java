@@ -116,3 +116,124 @@ Esta clase contiene distintos procedimientos para leer entradas de un tipo de da
         }
     }
 \end{lstlisting}
+
+\subsection{Despliegue de información y formato}
+Podemos ver en el código anterior que está la siguiente instrucción: \textit{System.out.println(variable);}, esta instrucción es utilizada para imprimr cadenas o variables en pantalla, \textbf{System.out} es la clase base que se utiliza, sin embargo, \textbf{println} escribe una cadena o variable en pantalla y da un salto de línea automáticamente, si buscamos que no se dé ningún salto de línea, podemos utilizar el método \textbf{print()}, que escribe una cadena o variable sin dar un salto de línea, bastante sencillo, \textbf{printf(formato, argumentos)} te permite dar formatos a cadenas, como se ve en el siguiente código en el lenguaje C\#:
+\\begin{center}\textit{Console.WriteLine("\{0\} - \{1\}", var1, var2);}\end{center}
+Si podemos apreciar, la cadena desplegada con \textit{Console.WriteLine} tiene un formato, donde los números son sustituidos por variables, podemos aplicar esto mismo utilizando \textit{printf(formato, argumentos)}, como se ve en el siguiente código:
+\begin{center}\textit{System.out.printf("\%s - \%s", var1, var2);}\end{center}
+Dejo las distintas opciones de formatos en JAVA:
+\begin{itemize}
+	\item \textbf{\%b}: escribe un booleano.
+	\item \textbf{\%h}: escribe un Hascode.
+	\item \textbf{\%s}: escribe una cadena.
+	\item \textbf{\%c}: escribe una cadena unicode.
+	\item \textbf{\%d}: escribe un entero decimal.
+	\item \textbf{\%o}: escribe un entero octal.
+	\item \textbf{\%x}: escribe un entero hexadecimal.
+	\item \textbf{\%f}: escribe un real decimal.
+	\item \textbf{\%e}: escribe un real con notación científica.
+	\item \textbf{\%g}: escribe un real con notación científica o decimal.
+	\item \textbf{\%a}: escribe un real hexadecimal con mantisa y exponente.
+	\item \textbf{\%t}: escribe una fecha u hora.
+\end{itemize}
+
+\subsection{Limpieza de Buffer de entrada}
+En ocasiones, cuando ingresamos múltiples datos de distintos tipos en variables utilizando el mismo objeto \textit{Scanner}, en este ocurre un conflicto de entrada, donde el Buffer mantiene el último dato ingresado en vez de abrir la posibilidad de ingresar otro; la situación regular que desearíamos sería la siguiente:
+\begin{lstlisting}
+    import java.util.Scanner; //Importa la clase al proyecto
+
+    class App {
+        public static void main(String[ ] args) {
+        		String nombre;
+        		int edad;
+        		Scanner lectura = new Scanner(System.in);
+        		
+        		System.out.print("Ingrese su nombre: "); nombre = lectura.nextLine();
+        		System.out.print("Ingrese su edad: "); edad = lectura.nextInt();
+        		
+        		System.out.println("Su nombre es: " + nombre);
+        		System.out.println("Su edad es: " + edad);
+        		
+        		//Despliega:
+        		//Su nombre es: luis
+        		//Su edad es: 21
+        }
+    }
+\end{lstlisting}
+Sin embargo, si cambiamos el orden de la asignación de valores a las variables del código anterior (\textit{nextLine()} después de \textit{nextInt()}), es decir, primero ingresamos un valor número y después una cadena, ocurre la siguiente situación:
+\begin{lstlisting}
+    import java.util.Scanner; //Importa la clase al proyecto
+
+    class App {
+        public static void main(String[ ] args) {
+        		String nombre;
+        		int edad;
+        		Scanner lectura = new Scanner(System.in);
+        		
+        		System.out.print("Ingrese su edad: "); edad = lectura.nextInt();
+        		System.out.print("Ingrese su nombre: "); nombre = lectura.nextLine();
+        		
+        		System.out.println("Su nombre es: " + nombre);
+        		System.out.println("Su edad es: " + edad);
+        		
+        		//Despliega:
+        		//Su nombre es: Su edad es: 21
+        }
+    }
+\end{lstlisting}
+Entonces, vemos que el programa se salta la parte del ingreso de un valor a la variable de cadena, esto es debido a que el objeto Scanner tiene un conflicto en su buffer, para solucionarlo, escribimos la instrucción \textbf{lectura.nextLine()} entre ambas asignaciónes de variables:\begin{center}\textit{System.out.print("Ingrese su edad: "); edad = lectura.nextInt();\\lectura.nextLine();\\System.out.print("Ingrese su nombre: "); nombre = lectura.nextLine();}\end{center}
+Esta instrucción recibe lo que sea que esté en el buffer del objeto Scanner, dejando el paso libre a la siguiente asignación de valor y evita este conflicto de buffer.
+
+\subsection{Pausar un programa}
+Podemos pausar el flujo de un programa utilizando el comando \textbf{System.in.read()} (proveniente de la clase \textbf{java.io.IOException}) posicionandolo en la sección de código donde deseemos pausarlo, como vemos en el siguiente código:
+\begin{lstlisting}
+	import java.io.IOException;
+
+    class App {
+        public static void main(String[ ] args) {
+        		System.out.print("Mensaje 1");
+        		System.in.read(); //Espera a que se presione ENTER para finalizar
+        		System.out.print("Mensaje 2");
+        		System.in.read(); //Espera a que se presione ENTER para finalizar
+        		System.out.print("Mensaje 3");
+        		System.in.read(); //Espera a que se presione ENTER para finalizar
+        }
+    }
+\end{lstlisting}
+\textbf{Advertencia}: después de experimentar con este método durante algunos programas, he visto que causa conflicto con la clase Scanner, lanzando excepciones imprevistas, use esta herramienta bajo su propio riesgo.
+
+
+
+\section{Terminar la ejecución de un programa}
+Si deseamos finalizar la ejecución de un programa, podemos utilizar la instrucción \textbf{Systen.exit()}, dentro de los paréntesis, va un valor entero el cual indicará cómo es que terminará la ejecución, donde \textbf{0 indica una finalización éxitosa} y sin errores, \textbf{1} o \textbf{-1 para indicar una finalización con errores} o mensaje de error.
+\begin{lstlisting}
+    class App {
+        public static void main(String[ ] args) {
+        		System.out.print("Presione ENTER para continuar...");
+        		System.in.read(); //Espera a que se presione ENTER para finalizar
+        		System.exit(0); //Finaliza el programa
+        		
+        		//Despliega:
+        		//Presione ENTER para continuar...
+        		//Process finished with exit code 0
+        }
+    }
+\end{lstlisting}
+
+
+
+\section{Limpieza de pantalla}
+Si deseamos que, al cumplir alguna condición o después de presionar alguna tecla, todo el contenido de nuestra consola, terminal o pantalla se borre, en JAVA existen algunas opciones para lograr esta tarea, después de probarlas, la que nos funcionó es la siguiente: debemos utilizar el \textbf{intérprete de línea de comandos} (CMD por sus siglas en inglés) para utilizar su comando \textbf{cls}, no explicaremos a detalle como es que funciona la siguiente instrucción, usted puede escribirla donde desee que se ejecute, y verá la tarea resuelta:
+\begin{lstlisting}
+	import java.io.IOException; //Clase necesaria para utilizar CMD en JAVA
+
+    class App {
+    		//En la clase donde se vaya a utilizar el CMD, debe lanzar (throw) las excepciones IOException y InterruptedException
+        public static void main(String[ ] args) throws IOException, InterruptedException{
+        		System.out.print("Hola mundo 1"); //Despliega un mensaje
+        		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //Instrucción para limpiar pantalla
+        		System.out.print("Hola mundo 2"); //Despliega otro mensaje
+        }
+    }
+\end{lstlisting}
