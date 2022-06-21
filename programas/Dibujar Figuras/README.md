@@ -1,18 +1,9 @@
-## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Bienvenidos
+Este programa fue realizado en Visual Studio Code, con el conjunto de extensiones *Debugger for Java*, *Extension Pack for Java*, *Maven for Java*, *Projecto Manager for Java* y *Test Runner for Java*.
+## Estructura de la carpeta
+Esta carpeta contiene dos subfolders, los cuales son:
+- `src`: contiene los archivos *.java*.
+- `lib`: mantiene dependencias y otros archivos.
+- `bin`: aquí se guardan, por defecto, los archivos compilados generados.
+## Descripción del programa
+El objetivo de este programa es practicar conceptos básicos de programación, así como la sintaxís de JAVA, no tiene un tema en particular, es simplemente practicar en este lenguaje aplicando bucles para dibujar figuras, un reto considerable e interesante.

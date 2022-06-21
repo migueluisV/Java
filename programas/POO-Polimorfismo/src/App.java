@@ -10,33 +10,33 @@ public class App {
         Mamifero m = new Mamifero(nombre);
         m.Desplazarse();
         System.out.println("\nPresiona ENTER para continuar...");
-        System.in.read();
+        System.in.read(); //Espera a que se presione ENTER para continuar.
 
-        lectura.nextLine();
+        lectura.nextLine(); //Limpia buffer de entrada de datos.
 
         System.out.println("-Nombres para animales-\n");
         System.out.printf("Ingresa el nombre para un mamifero: "); nombre = lectura.nextLine();
         Ave a = new Ave(nombre);
         a.Desplazarse();
         System.out.println("\nPresiona ENTER para continuar...");
-        System.in.read();
+        System.in.read(); //Espera a que se presione ENTER para continuar.
 
-        lectura.nextLine();
+        lectura.nextLine(); //Limpia buffer de entrada de datos.
 
         System.out.println("-Nombres para animales-\n");
         System.out.printf("Ingresa el nombre para un mamifero: "); nombre = lectura.nextLine();
         Pez p = new Pez(nombre);
         p.Desplazarse();
         System.out.println("\nPresiona ENTER para continuar...");
-        System.in.read();
+        System.in.read(); //Espera a que se presione ENTER para continuar.
 
-        lectura.nextLine();
+        lectura.nextLine(); //Limpia buffer de entrada de datos.
 
         System.out.println("-Nombres para animales-\n");
         System.out.printf("Ingresa el nombre para un mamifero: "); nombre = lectura.nextLine();
         Reptil r = new Reptil(nombre);
         r.Desplazarse();
 
-        lectura.close();
+        lectura.close(); //Cierra el objeto Scanner.
     }
 }

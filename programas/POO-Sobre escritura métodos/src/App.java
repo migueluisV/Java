@@ -1,5 +1,5 @@
-import java.io.IOException;
-import java.util.InputMismatchException;
+import java.io.IOException; //Excepción si hay error durante entrada y salida de datos.
+import java.util.InputMismatchException; //Excepción si hay un error de formato en tipos de datos.
 import java.util.Scanner;
 
 public class App {
@@ -8,7 +8,7 @@ public class App {
     public static void ValoresArea(double r, double a) throws InterruptedException, IOException{
         double radio = 0, altura = 0;
 
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //Limpia consola/terminal/pantalla.
 
         System.out.println("-Valores para calcular áreas de figuras-\n");
         try{
@@ -16,12 +16,11 @@ public class App {
             System.out.printf("Ingresa un valor para altura: "); altura = lectura.nextDouble();
         } catch (InputMismatchException e){
             System.out.println("Error de formato.");
-            lectura.nextLine();
+            lectura.nextLine(); //Limpia buffer de entrada de datos.
             ValoresArea(radio, altura);
         }
 
-        
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //Limpia consola/terminal/pantalla.
 
         Circulo circulo = new Circulo(radio);
         circulo.ImprimirArea();

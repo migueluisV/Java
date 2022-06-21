@@ -1,20 +1,21 @@
-import java.io.IOException;
+import java.io.IOException; //Excepción si hay error durante entrada y salida de datos.
+import java.util.InputMismatchException; //Excepción si hay un error de formato en tipos de datos.
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
 public class App {
+    static Scanner lectura = new Scanner(System.in);
+
     static void Menu() throws InterruptedException, IOException, InputMismatchException{
-        Scanner lectura = new Scanner(System.in);
         Figuras figura = new Figuras();
         byte Op;
 
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //Limpia consola/terminal/pantalla.
 
         try{
             System.out.println("Selecciona una opción del menú:\n");
             System.out.println("1) Dibujar triángulo.\n2) Dibujar rectángulo.\n3) Dibujar cuadrado.\n4) Salir.");
             System.out.printf("Opción: "); Op = lectura.nextByte();
-            lectura.nextLine();
+            lectura.nextLine(); //Limpia buffer de entrada de datos.
 
             switch(Op){
                 case 1:
@@ -31,16 +32,16 @@ public class App {
                     break;
                 case 4:
                     lectura.close();
-                    System.exit(0);
+                    System.exit(0); //Salida del programa.
                 break;
                 default:
                     System.out.print("Ingresa un valor del menú proporcionado. Presiona ENTER para continuar.");
-                    System.in.read();
+                    System.in.read(); //Espera a que se presione ENTER para continuar.
                     Menu();
             }
         } catch(InputMismatchException e){
             System.out.print("Error de formato.\n");
-            lectura.nextLine();
+            lectura.nextLine(); //Limpia buffer de entrada de datos.
             Menu();
         }
     }

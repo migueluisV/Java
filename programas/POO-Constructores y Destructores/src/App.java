@@ -14,13 +14,13 @@ public class App {
         t.Resultado();
 
         System.out.print("Presiona ENTER para continuar...");
-        System.in.read();
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        System.in.read(); //Espera a que se presione ENTER para continuar.
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //Limpia consola/terminal/pantalla.
 
         System.out.println("-Datos del recángulo-\n");
         System.out.printf("Ingresa base del recángulo: "); Base = lectura.nextFloat();
         System.out.printf("Ingresa altura del recángulo: "); Altura = lectura.nextFloat();
-        lectura.close();
+        lectura.close(); //Cierra el objeto Scanner.
 
         Rectangulo r = new Rectangulo(Base, Altura);
         r.Area(); r.Perimetro();

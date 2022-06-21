@@ -1,13 +1,26 @@
+import java.util.InputMismatchException; //Excepción si hay un error de formato en tipos de datos.
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    static Scanner lectura = new Scanner(System.in);
+
+    static void IngresoEdad(){
         int Edad;
-        Scanner lectura = new Scanner(System.in);
-        System.out.println("Registra una edad: ");
-        Edad = lectura.nextInt();
-        lectura.close();
-        Edad *= 365;
-        System.out.println("Has vivido " + Edad + " días");
+
+        try{
+            System.out.printf("Registra una edad: "); Edad = lectura.nextInt();
+            lectura.close();
+            Edad *= 365;
+
+            System.out.println("Has vivido " + Edad + " días");
+        } catch (InputMismatchException e){
+            System.out.println("Error de formato.");
+            lectura.nextLine();
+            IngresoEdad();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        IngresoEdad();
     }
 }

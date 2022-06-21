@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.InputMismatchException;
+import java.util.InputMismatchException; //Excepción si hay un error de formato en tipos de datos.
 
 public class CaliAl {
     public byte CalVali = 0, CalInvali = 0, CaliApro = 0, CaliRepro = 0;
@@ -8,9 +8,9 @@ public class CaliAl {
 
     public void IngresoDatos(float[] cal, String[] nom, int cont){
         int i;
-        if (cont == 5){
+        if (cont == 5){ //Condición para salir del método recursivo.
             Prom = AcumCali / 5;
-            for (i = 0; i < 5; i++){
+            for (i = 0; i < 5; i++){ //Clasificación de datos ingresados.
                 if (cal[i] > CaliMax){
                     CaliMax = cal[i];
                 }
@@ -23,7 +23,7 @@ public class CaliAl {
                 }
             }
 
-            lectura.close();
+            lectura.close(); //Cierra el objeto Scanner.
             Despliegue(cal, nom);
         } else{
             try{
@@ -31,7 +31,7 @@ public class CaliAl {
                 lectura.nextLine();
                 System.out.printf("%s. Ingresa un nombre: ", (cont + 1)); nom[cont] = lectura.nextLine();
 
-                AcumCali += cal[cont];
+                AcumCali += cal[cont]; //Clasificación de datos ingresados.
                 if (cal[cont] > 0.0 && cal[cont] <= 10.0){
                     CalVali++;
                     if (cal[cont] > 6.0 && cal[cont] <= 10.0){
@@ -43,11 +43,11 @@ public class CaliAl {
                     CalInvali++;
                 }
 
-                cont++;
-                IngresoDatos(cal, nom, cont);
+                cont++; //Incrementa contador.
+                IngresoDatos(cal, nom, cont); //Llamada recursiva.
             } catch(InputMismatchException e){
                 System.out.println("Error de formato.");
-                lectura.nextLine();
+                lectura.nextLine(); //Limpia buffer de entrada de datos.
                 IngresoDatos(cal, nom, cont);
             }
         }
