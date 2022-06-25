@@ -20,6 +20,7 @@ Dentro del bloque \textbf{try}, escribimos un bloque de código donde imaginamos
         }
     }
 \end{lstlisting}
+
 \subsection{Manejo de múltiples excepciones}
 La palabra reservada \textbf{throw} sirve para \textbf{lanzar} o llamar a una de las tantas excepciones que maneja Java, es una alternativa a crear el bloque \textit{try-catch}, la estructura de \textit{throw} es:\begin{center}\textit{throw new $<$Excepción$>$($<$Argumento$>$)}\end{center}
 Para poder utilizar esta palabra reservada, debemos hacer que el código que se va a analizar \textbf{esté sujeto} a la excepción que queremos utilizar, por ejemplo, si queremos realizar una división, sabemos que no se puede dividir entre 0, por lo que tenemos el siguiente código:
@@ -269,7 +270,7 @@ Cosas a considerar con los hilos:
 
 \section{Trabajando con archivos}
 El paquete \textbf{java.io} contiene una clase llamada \textbf{File} que nos permite trabajar con archivos, una vez importada, declaramos un objeto de dicha clase y, en los paréntesis de File al final de la declaración, escribimos la ruta del archivo que buscamos trabajar, como se ve a continuación:
-\begin{center}\textit{import java.io.File; //Paquete necesario para trabajar con archivos\\File $<$Nombre$>$ = new File ($<$Ruta del archivo$>$); //Declaración objeto File}\end{center}
+\begin{center}\textit{import java.io.File; //Paquete necesario para trabajar con archivos\\File $<$Nombre$>$ = new File ("Ruta del archivo"); //Declaración objeto File}\end{center}
 El siguiente código nos ayuda a verificar la existencia del archivo que trabajaremos:
 \begin{lstlisting}
     import java.io.File; //Paquete necesario para trabajar con archivos
@@ -289,6 +290,9 @@ El siguiente código nos ayuda a verificar la existencia del archivo que trabaja
 \textbf{Nota}: se utilizan doble barra invertida (\textbackslash\textbackslash) para escribir las rutas de un archivo, porque la diagonal invertida suele ser usada como \textbf{secuencia de escape}, además, es recomendable trabajar archivos alrededor de un bloque try-catch.
 
 \subsection{Lectura}
+Dejamos a su disposición dos formas de leer un archivo:
+
+\subsubsection{Método 1. Scanner}
 La clase \textbf{Scanner} del paquete \textbf{java.util} nos va a ser util para leer el contenido de un archivo en Java, el constructor de esa clase permite que le pasemos un objeto File en su constructor y declaración, como se ve a continuación:
 \begin{lstlisting}
     try{
@@ -311,6 +315,9 @@ La clase \textit{Scanner} es heredada de \textit{Iterator}, por lo que esta prim
         System.out.println("No encontrado");
     }
 \end{lstlisting}
+
+\subsubsection{Método 2. FileReader y BufferedReader}
+
 
 \subsection{Creación y escritura}
 Utilizamos la clase \textbf{Formatter} del paquete \textbf{java.util} para crear y escribir archivos en una ruta especificada, en caso de que el archivo ya exista, el archivo se sobre escribirá. Un ejemplo:
