@@ -145,7 +145,7 @@ public class Pila_Alumnos {
             Menu(Prom, Alum);
         } else{
             System.out.println("---Alumnos con sus promedios---\n");
-            for(i = 0; i < Alum.size(); i++){
+            for(i = (Alum.size() - 1); i >= 0; i--){
                 System.out.printf("%s - %s\n", Alum.elementAt(i), Prom.elementAt(i));
             }
         }
