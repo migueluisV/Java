@@ -287,7 +287,7 @@ El siguiente código nos ayuda a verificar la existencia del archivo que trabaja
         }
     }
 \end{lstlisting}
-\textbf{Nota}: se utilizan doble barra invertida (\textbackslash\textbackslash) para escribir las rutas de un archivo, porque la diagonal invertida suele ser usada como \textbf{secuencia de escape}, además, es recomendable trabajar archivos alrededor de un bloque try-catch.
+\textbf{Nota}: se utilizan doble barra invertida (\textbackslash\textbackslash) para escribir las rutas de un archivo, porque la diagonal invertida suele ser usada como \textbf{secuencia de escape}, además, es recomendable trabajar archivos alrededor de un bloque try-catch, además, no olvide agregar la extensión del archivo en el cual quiere trabajar.
 
 \subsection{Lectura}
 Dejamos a su disposición dos formas de leer un archivo:
@@ -302,24 +302,61 @@ La clase \textbf{Scanner} del paquete \textbf{java.util} nos va a ser util para 
 \end{lstlisting}
 La clase \textit{Scanner} es heredada de \textit{Iterator}, por lo que esta primera se comporta como la última, podemos utilizar los métodos mencionados en el punto de Iterators para esta ocasión, el método \textit{next()}, para Scanner, regresa el contenido del archivo palabra a palabra, por lo que el método regresará una línea del archivo hasta que encuentre un salto, por lo tanto, obtendremos línea a línea hasta que se acabe el fichero. Expandiremos el ejemplo anterior:
 \begin{lstlisting}
-    try{
-        File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
-        Scanner arlectura = new Scanner(archivo); //Declara objeto Scanner para abrir un archivo
+	import java.io.File;
+	import java.util.Scanner;
+
+	public class MyClass {
+		public static void main(String[ ] args) {
+			try{
+				File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+    		    		Scanner arlectura = new Scanner(archivo); //Declara objeto Scanner para abrir un archivo
         
-        while(arlectura.hasNext()){ //Mientras encuentre más palabras...
-            System.out.println(arlectura.next()); //Imprime una línea del archivo
-        }
-        arlectura.close(); //Cierra el objeto Scanner
-    } catch(FileNotFoundException e){ //Excepción por si no encuentra el archivo
-    
-        System.out.println("No encontrado");
-    }
+        			while(arlectura.hasNext()){ //Mientras encuentre más palabras...
+            			System.out.println(arlectura.next()); //Imprime una línea del archivo
+	        		}
+    		    		arlectura.close(); //Cierra el objeto Scanner
+    			} catch(FileNotFoundException e){ //Excepción por si no encuentra el archivo
+	        		System.out.println("No encontrado");
+    			}
+	    	}	
+	}
 \end{lstlisting}
 
 \subsubsection{Método 2. FileReader y BufferedReader}
+Este método requiere de dos clases importadas a nuestro proyecto JAVA: \textbf{FileReader}, el cual se encarga de recibir la ruta del archivo que se va a leer, y \textbf{BufferedReader}, la cual tiene la tarea de leer el archivo almacenado en el objeto \textit{FileReader}, recordemos que debemos utilzar las siguientes instrucciones para poder trabajar con estas clases:\begin{center}\textit{import java.io.FileReader;\\import java.io.BufferedReader;}\end{center}
+Entonces, al objeto FileReader (\textbf{fr}) le pasamos la ruta del archivo a trabajar (por medio de una cadena con la ruta, o un objeto \textit{File}), posterior a ello, al objeto BufferedReader (\textbf{br}) le pasamos el objeto FileReader que creamos previamente, este objeto \textit{br} posee el método \textbf{readline()}, el cual obtiene toda una línea de un archivo, este método se lo asignamos a alguna variable string que reciba línea a línea el contenido del archivo en cuestión y las imprima en pantalla, finalmente, si esta variable es \textbf{null}, signfica que ya no hay más líneas por leer en el archivo, por lo que hemos finalizado el proceso de lectura de un archivo. Dejo un código donde se aprecie más lo anteriormente comentado:
+\begin{lstlisting}
+	import java.io.File;
+	import java.io.FileReader;
+	import java.io.BufferedReader;
 
+	public class MyClass {
+		public static void main(String[ ] args) {
+			try{
+				String linea;
+		    	    File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+    			    FileReader fr = new FileReader(archivo); //Declara objeto FileReader para abrir un archivo
+				BufferedReader br = new BufferedReader(fr); //Declara objeto BufferedReader para leer un objeto FileReader
+        
+        			while((linea = br.readline()) != null){ //Mientras encuentre más palabras...
+            			System.out.println(linea); //Imprime una línea del archivo
+	        		}
+    			} catch(FileNotFoundException e){ //Excepción por si no encuentra el archivo
+        			System.out.println("No encontrado");
+	    		} finally{
+    		     	if (null != fr){ //Cierra los objetos FileReader y BufferedReader.
+         	    		fr.close();
+             			br.close();
+	           	}
+    		     }
+	    	 }
+	}
+\end{lstlisting}
 
 \subsection{Creación y escritura}
+Dejamos a su disposición dos formas de crear y escribir un archivo:
+
+\subsubsection{Método 1. Formatter}
 Utilizamos la clase \textbf{Formatter} del paquete \textbf{java.util} para crear y escribir archivos en una ruta especificada, en caso de que el archivo ya exista, el archivo se sobre escribirá. Un ejemplo:
 \begin{lstlisting}
     import java.util.Formatter; //Paquete necesario para trabajar con Formatter
@@ -351,3 +388,126 @@ Una vez declarado el objeto, podemos escribir en él con el método \textbf{form
         }
     }
 \end{lstlisting}
+
+\subsubsection{Método 2. FileWriter y PrintWriter}
+Similar al método 2 para lectura de archivos, la clase \textbf{FileWriter} recibe la ruta de un archivo para trabajar con él, y la clase \textbf{PrintWriter} se encarga de escribir en el objeto \textit{FileWriter}, estas clases deben ser importadas:\begin{center}\textit{import java.io.FileWriter;\\import java.io.PrintWriter;}\end{center}
+Lo que va escribiendo es una línea string tras otra, por lo que, primero debemos almacenar en una variable string lo que queremos escribir, si esta línea tiene algún carácter (longitud distint a 0), esta variable se escribe en el archivo que queremos, si no tiene ningun carácter, finaliza la escritura del archivo, como vemos en el siguiente código:
+\begin{lstlisting}
+	import java.io.File;
+	import java.io.FileWriter;
+	import java.io.PrintWriter;
+
+	public class MyClass {
+		public static void main(String[ ] args) {
+			try{
+				String linea;
+		        	File archivo = new File("D:\\Escritorio\\test.txt"); //Declara objeto File con la ruta del archivo
+				FileWriter fw = new FileWriter(archivo); //El objeto FileWriter recibe la ruta y nombre del archivo a escribir.
+				PrintWriter pw = new PrintWriter(fw); //El objeto PrintWriter está listo para escribir en el archivo.
+        
+        			System.out.println("-Escribe el contenido del fichero. Finalice cada línea con un ENTER. Finalice la escritura dejando una línea vacía con un ENTER-\n");
+				linea = lectura.nextLine(); //Variable que recibe las lineas de texto que queremos ingresar.
+
+    		        	while (linea.length() != 0){ //Escribe en el archivo mientras haya carácteres a escribir.
+         	    	   pw.println(linea); //Escribe la variable en el archivo.
+             		   linea = lectura.nextLine();
+	            	}
+    		    } catch(IOException e){
+         	   	System.out.println("Error: " + e);
+            		System.out.println("Ruta del error: "); e.printStackTrace();
+	        } finally{
+    		        	if (null != archivo){ //Cierra los objetos FileWriter y PrintWriter.
+         	    	    archivo.close();
+             		    pw.close();
+             			System.out.println("Guarado en lib/ con éxito.");
+	        		}
+	        }
+	    }
+	}
+\end{lstlisting}
+En lo personal, me gustan más los métodos 2 de la lectura, creación y escritura de archivos, es más fácil y cómodo trabajar con estos métodos a diferencia de los métodos 1 descritos.
+
+
+
+\section{Pilas y Colas dinámicas}
+Una \textbf{pila} es una lista que sigue la filosofía de \textit{Last in, First out} (último en llegar, primero en irse por sus significado en español), lo cual se refiere aquellas listas donde, conforme se agregan elementos, el primero en ser despachado, trabajado, mostrado, u cualquier otra operación, es el último elemento ingresado en la pila\\
+Entonces, una \textbf{cola} es una lista que sigue el concepto de \textit{Fist int, First out} (primero en llegar, primero en irse por su significado en español), una cola es aquella típica fila de supermercado o tienda, donde el primero que llega y se forma, es el primero que es atendido, puede considerarse lo contrario a la pila, pero ambos son únicos.\\
+Para finalizar, las pilas y colas \textbf{dinámicas} se refieren a que estas listas tendrán un tamaño indefinido, es decir, cuando sean declaradas en JAVA, no es necesario decir que la lista tendrá x elementos almacenados, por lo que su tamaño puede cambiar durante la ejecución, contrario a este concepto, las pilas y colas \textbf{estáticas} deben tener un tamaño definido en su declaración, y su tamaño no puede cambiar durante la ejecución del programa, en este documento no trataremos pilas y colas estáticas, solamente dinámicas.\\
+Importamos la clase \textbf{Stack} e interfaz \textbf{Queue} a nuestro proyecto para crear objetos de las mismas. Debemos aclarar que \textit{Queue} es una interfaz, no se pueden crear objetos de esta directamente, tenemos que hacer \textit{upcasting} de esta interfaz a una subclase de la misma, como \textbf{LinkedList}, \textbf{ArrayDeque} y \textbf{PriorityQueue}, queda a su elección. Dejamos un código extenso donde vemos el funcionamiento de la clase Stack e interfaz Queue:
+\begin{lstlisting}
+	// Java code for stack implementation
+	import java.util.Stack;
+	import java.util.Queue;
+	import java.util.Iterator;
+	import java.util.LinkedList;
+
+	class Test{
+		//Agrega elementos al tope de la pila
+		static void stack_push(Stack<Integer> stack){
+			for(int i = 0; i < 5; i++)
+			{
+				stack.push(i);
+			}
+		}
+	
+		//Despliega los valores del tope de la pila
+		static void stack_pop(Stack<Integer> stack){
+			System.out.println("Pop Operation:");
+
+			for(int i = 0; i < 5; i++)
+			{
+				Integer y = (Integer) stack.pop();
+				System.out.println(y);
+			}
+		}
+
+		//Muestra el tope de la pila sin eliminarlo
+		static void stack_peek(Stack<Integer> stack){
+			Integer element = (Integer) stack.peek();
+			System.out.println("Element on stack top: " + element);
+		}
+	
+		//Busca un elemento en la pila
+		static void stack_search(Stack<Integer> stack, int element){
+			Integer pos = (Integer) stack.search(element);
+
+			if(pos == -1)
+				System.out.println("Element not found");
+			else
+				System.out.println("Element is found at position: " + pos);
+		}
+
+		public static void main (String[] args){
+			Stack<Integer> stack = new Stack<Integer>(); //Declara objeto Stack tipo Interger
+			Queue<Integer> q = new LinkedList<>(); //Declara objeto Queue del tipo LinkedList Interger
+
+			stack_push(stack); //Llama al método que agrega valores a la pila
+			stack_pop(stack); //Llama al método que despliega valores de la pila
+			stack_push(stack); //Vuelve a llamar al método que agrega valores a la pila
+			stack_peek(stack); //Llama al método que muestra el tope de la pila
+			stack_search(stack, 2); //Llama al método que busca el valor 2 en la pila
+			stack_search(stack, 6); //Llama al método que busca el valor 6 en la pila
+			
+
+			//Agrega valores a la cola
+			for (int i = 0; i < 5; i++){
+				q.add(i);
+			}
+
+			//Despliega los valores de la cola
+			System.out.println("Elements of queue " + q);
+
+			//Elimina el valor tope de la cola
+			int removedele = q.remove();
+			System.out.println("removed element-" + removedele);
+
+			//Despliega los valores de la cola
+			System.out.println(q);
+
+			//Despliega el valor tope de la cola
+			int head = q.peek();
+			System.out.println("head of queue-" + head);
+		}
+	}
+\end{lstlisting}
+El código anterior está comentado, por lo que puede ver todos los métodos especiales que poseen las clases Stack y Queue, como lo son: peek, poll, push, search, etc.

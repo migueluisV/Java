@@ -529,7 +529,33 @@ Para realizar distintas operaciones matemáticas en Java, tenemos la clase \text
     \item \textbf{Math.ceil(4.75)}: redondea el valor decimal del parámetro a su entero más cercano. El valor de retorno es un \textbf{double}. Regresa 5.0
     \item \textbf{Math.floor(4.75)}: redondea el valor decimal del parámetro a su entero más cercano. El valor de retorno es un\textbf{entero}. Regresa 5
     \item \textbf{Math.max(3, 4) y Math.min(3, 4)}: regresa el mayor o mínimo de una serie de números. Regresa 4 y 3.
+    \item \textbf{Math.random()}: regresa un número decimal aleatorio entre 0 y 1, si buscamos que nos regrese números aleatorios comprendidos en un rango de números enteros, debemos multiplicar la función random por el límite superior y sumarle el límite inferior, como vemos en la siguiente fórmula: \textit{(Math.random() * limS + limI);}
 \end{itemize}
+
+\subsection{La clase Random}
+Esta clase tiene mayor flexibilidad para generar números aleatorios, debemos importarla a nuestro proyecto, y con eso podremos crear objetos de la misma: \begin{center}\textit{import java.util.Random; //Clase para generar números aleatorios\\Random aleatorio = new Random($<$\textit{Semilla}$>$);}\end{center}
+El constructor de la clase permite que incluyamos una \textbf{semilla} para generar números aleatorios, algunos de los métodos que posee esta clase son: \textbf{nextDouble()}, \textbf{nextFloat()} o \textbf{nextInt()}; por defecto, los valores que regresan estos métodos son entre 0 y 1, si deseamos que regrese valores comprendidos en un rango entero, entre los paréntesis del método que queramos utilizar, el límite superior menos el límite inferior más 1, y a todo esto, sumarle el límite inferior, como vemos en la fórmula: \textit{aleatorio.nextInt(limS - limI + 1) + limI;}
+Un código breve y sencillo para entender el funcionamiento de Random:
+\begin{lstlisting}
+import java.util.Random;
+
+public class App{
+	public static void main(String[] args){
+		Random numAleatorio = new Random(); //Declaración de objeto Random sin semilla
+		Random numAleatorio1 = new Random(234); //Declaración de objeto Random con semilla
+
+		// Numero entero entre 25 y 75
+		int n = numAleatorio.nextInt(75-25+1) + 25;
+
+		// Asigna una nueva semilla
+		numAleatorio.setSeed(1235);
+
+		// Numero decimal entre 0.0 y 1.0
+		double d = numAleatorio.nextDouble();
+	}
+}
+\end{lstlisting}
+
 
 \subsection{El método \textit{equals()}}
 Cuando se trata de comparar dos objetos de una misma clase, no podemos utilizar el operador de comparación \textbf{==}, ya que los objetos hacen referencia a una dirección de memoria, entonces, al compararlos con este operador, verá que la dirección de memoria es distinta, por lo que el resultado siempre será \textit{false}. Para comparar exitosamente dos objetos de una misma clase, se requiere utilizar el método \textbf{(equals())}, pero no se usa así nada más, este método de ser \textbf{sobre escrito}, y acompañarlo con el método \textbf{hashCode()}.\\
